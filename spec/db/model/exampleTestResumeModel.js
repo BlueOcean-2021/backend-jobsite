@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const resumeModel = mongoose.model('resume', resumeSchema);
 
 var test = {
