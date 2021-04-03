@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
+const db = require('../database/database.js');
 
 const app = express();
 
@@ -7,5 +8,5 @@ app.use(express.static('client/dist'));
 app.use(express.json());
 
 app.listen(process.env.PORT, () => {
-  console.log('Client server listening on 3000')
+  console.log('Client server listening on 3001')
 });
