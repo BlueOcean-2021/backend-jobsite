@@ -101,7 +101,7 @@ const seekerUserSchema = new mongoose.Schema({
       jobListingId: { required: true, type: String },
       interestLevel: {
         type: String,
-        enum: ['1', '2', '3'] ,
+        enum: ['1', '2', '3'],
         required: true
       }
     }]

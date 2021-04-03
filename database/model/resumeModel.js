@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const db = require('../database.js');
 
 const resumeSchema = new mongoose.Schema({
+  seekerId: { type: String, required: true },
   firstName: {
     type: String,
     required: true,
@@ -122,4 +123,6 @@ const resumeSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now }
 });
 
-module.exports = resumeSchema;
+const resumeModel = mongoose.model('resume', resumeSchema);
+
+module.exports = resumeModel;

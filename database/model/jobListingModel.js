@@ -80,7 +80,9 @@ const jobListingSchema = new mongoose.Schema({
   }
 });
 
-module.exports = jobListingSchema;
+const jobListingModel = mongoose.model('listing', jobListingSchema);
+
+module.exports = jobListingModel;
 
 
 
