@@ -3,6 +3,7 @@ const jobListingSchema = require('../../../database/model/jobListingModel.js')
 const jobListingModel = mongoose.model('jobListing', jobListingSchema);
 
 var test = {
+  employerId: '6068b58447618a5d91817d24',
   company: 'Jbl',
   industry: 'Sound',
   datePosted: '2021-03-4',
@@ -20,9 +21,9 @@ var test = {
 }
 
 // jobListingModel.create(test)
-//   .then(() => console.log('test resume insert complete'))
+//   .then(res => console.log(`job lised in db:  ${res}`))
 //   .catch((err) => console.log(err));
 
-jobListingModel.find({})
+jobListingModel.find({employerId: '6068b58447618a5d91817d24'})
   .then((res) => console.log(res))
   .catch((err) => console.log(err));
