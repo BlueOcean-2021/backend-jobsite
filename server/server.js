@@ -1,11 +1,11 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
+const { application } = require('../config')
 
 const app = express();
 
 app.use(express.static('client/dist'));
 app.use(express.json());
 
-app.listen(process.env.PORT, () => {
-  console.log('Client server listening on 3000')
+app.listen(application.port, () => {
+  console.log('Client server listening on ' + application.port)
 });
