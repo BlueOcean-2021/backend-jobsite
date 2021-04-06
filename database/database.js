@@ -3,7 +3,7 @@ const { db } = require('../config');
 
 mongoose.connect(db.url, {useNewUrlParser: true, useUnifiedTopology: true});
 
-const dbConnect = mongoose.connection;
+const dbConnect = mongoose.connection
 
 dbConnect.on('error', () => {
   console.log('connection error:')
