@@ -50,7 +50,7 @@ const applicationsSchema = new mongoose.Schema({
     status: {
       required: true,
       type: String,
-      enum: ['started', 'submited', 'rejected', 'interview', 'pending']},
+      enum: ['started', 'submitted', 'rejected', 'interview', 'pending']},
     jobListingId: {required: true, type: String }
 });
 

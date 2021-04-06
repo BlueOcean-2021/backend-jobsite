@@ -52,7 +52,7 @@ const resumeSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 5,
-    maxLength: 10
+    maxLength: 5
   },
   education: {
     required: false,

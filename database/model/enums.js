@@ -22,7 +22,8 @@ const fieldsOfStudy = [
   'Mathematics',
   'Business',
   'Engineering and Technology',
-  'Medicine and Health'
+  'Medicine and Health',
+  'Other'
 ];
 
 
