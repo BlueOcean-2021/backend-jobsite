@@ -1,5 +1,7 @@
 const express = require('express');
-const { application } = require('../config')
+const { application } = require('../config');
+const listingRoutes = require('./routes/listing.js');
+const resumeRoutes = require('./routes/resume.js');
 
 const app = express();
 
