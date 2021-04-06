@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const db = require('../database.js');
 
 const jobListingSchema = new mongoose.Schema({
-  // send _id to frontend
-  employerId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  // when referencing job listing id, use to string method
+  employerId: { type: String, required: true },
   company: {
     type: String,
     equired: true,
@@ -77,12 +77,13 @@ const jobListingSchema = new mongoose.Schema({
     required: false,
     minLength: 2,
     maxLength: 500
-  }
+  },
+  seekerIds: { required: false, type: [String], default: [] }
 });
 
-const jobListingModel = mongoose.model('listing', jobListingSchema);
+const JobListingModel = mongoose.model('listing', jobListingSchema);
 
-module.exports = jobListingModel;
+module.exports = JobListingModel;
 
 
 

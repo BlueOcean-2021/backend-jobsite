@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const resumeModel = require('../model/resumeModel.js');
+const ResumeModel = require('../model/resumeModel.js');
 
 const resume = {
   createOne: (params) => {
     return new Promise ((resolve, reject) => {
-      resumeModel.create(params)
+      ResumeModel.create(params)
         .then(result => {
           resolve(result)
         })
@@ -13,9 +13,9 @@ const resume = {
         })
     })
   },
-  findOne: (id) => {
+  findOne: (seekerId) => {
     return new Promise((resolve, reject) => {
-      resumeModel.find({_id: id})
+      ResumeModel.find({seekerId: seekerId})
         .then(result => {
           resolve(result);
         })
@@ -26,7 +26,7 @@ const resume = {
   },
   deleteOne: (id) => {
     return new Promise((resolve, reject) => {
-      resumeModel.deleteOne({_id: id})
+      ResumeModel.deleteOne({_id: id})
         .then(result => {
           resolve(result);
         })
@@ -35,9 +35,9 @@ const resume = {
         });
       });
   },
-  updateOne: (id) => {
+  updateOne: (resumeId) => {
     return new Promise((resolve, reject) => {
-      resumeModel.updateOne({_id: id})
+      ResumeModel.updateOne({_id: resumeId})
         .then(result => {
           resolve(result);
         })
@@ -48,7 +48,7 @@ const resume = {
   },
   findAll: () => {
     return new Promise((resolve, reject) => {
-      resumeModel.find({})
+      ResumeModel.find({})
         .then(result => {
           resolve(result);
         })
@@ -59,7 +59,7 @@ const resume = {
   },
   findAllByFilter: (params) => {
     return new Promise((resolve, reject) => {
-      resumeModel.find(params)
+      ResumeModel.find(params)
         .then(result => {
           resolve(result);
         })

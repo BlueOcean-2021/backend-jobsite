@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../database.js');
+const { fieldsOfStudy } = require('./enums.js');
 
 const resumeSchema = new mongoose.Schema({
   seekerId: { type: String, required: true },
@@ -67,12 +68,18 @@ const resumeSchema = new mongoose.Schema({
         required: true,
         length: 4
       },
-      degree: {
+      degreeType: {
         type: String,
+        enum: ['Diploma', 'Associates', 'Bachelors', 'PhD', 'other'],
         required: true,
         minLength: 2,
         maxLength: 30
       },
+      fieldOfStudy: {
+        type: String,
+        emun: fieldsOfStudy,
+        required: true,
+      }
     }]
   },
   workExperience: {
@@ -123,6 +130,6 @@ const resumeSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now }
 });
 
-const resumeModel = mongoose.model('resume', resumeSchema);
+const ResumeModel = mongoose.model('resume', resumeSchema);
 
-module.exports = resumeModel;
+module.exports = ResumeModel;

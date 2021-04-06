@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const db = require('../database.js');
 
+// Depricated, using employerNotes.js instead
+
+
 const employerUserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -8,33 +11,34 @@ const employerUserSchema = new mongoose.Schema({
     maxLength: 255,
     required: true
   },
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-    minLength: 1,
-    maxLength: 40
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-    minLength: 2,
-    maxLength: 40
-  },
-  company: {
-    type: String,
-    required: false,
-    minLength: 2,
-    maxLength: 40
-  },
+  // firstName: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  //   minLength: 1,
+  //   maxLength: 40
+  // },
+  // lastName: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  //   minLength: 2,
+  //   maxLength: 40
+  // },
+  // company: {
+  //   type: String,
+  //   required: false,
+  //   minLength: 2,
+  //   maxLength: 40
+  // },
   notes: {
     required: false,
     type: [{
       dateCreated: { type: Date, default: Date.now },
       category: {
         type: String,
-        enum: ['candidate', 'interview', 'listing', 'personal'], required: true
+        enum: ['candidate', 'interview', 'listing', 'personal'],
+        required: true
       },
       title: {
         type: String,

@@ -16,9 +16,9 @@ const listing = {
     });
   },
     // update one by listing _id
-  updateOne: (id, update) => {
+  updateOne: (jobListingId, update) => {
     return new Promise((resolve, reject) => {
-      jobListingModel.updateOne({_id: id}, update)
+      jobListingModel.updateOne({_id: jobListingId}, update)
         .then(result => {
           resolve(result);
         })
@@ -27,10 +27,10 @@ const listing = {
         });
     });
   },
-  // find one by listing _id
-  findOne: (id) => {
+  // find one by listing _id'.
+  findOne: (jobListingId) => {
     return new Promise((resolve, reject) => {
-      jobListingModel.findOne({_id: id})
+      jobListingModel.findOne({_id: jobListingId})
         .then(result => {
           resolve(result);
         })
@@ -40,9 +40,20 @@ const listing = {
     });
   },
   // delete one by listing _id
-  deleteOne: (id) => {
+  deleteOne: (jobListingId) => {
     return new Promise((resolve, reject) => {
-      jobListingMode.deleteOne({_id: id})
+      jobListingMode.deleteOne({_id: jobListingId})
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  getAll: () => {
+    return new Promise((resolve, reject) => {
+      jobListingModel.find({})
         .then(result => {
           resolve(result);
         })
@@ -53,8 +64,8 @@ const listing = {
   },
   // find all
   // if employ _id passed -> find all listings by specific employer
-  findAllByEmployer: (id) => {
-    let options = id ? {employerId: id} : {};
+  findAllByEmployer: (employerId) => {
+    let options = employerId ? {_id: employerId} : {};
     return new Promise((resolve, reject) => {
       jobListingModel.find(options)
         .then(result => {
@@ -69,6 +80,17 @@ const listing = {
   findAllByFilter: (params) => {
     return new Promise ((resolve, reject) => {
       jobListingModel.find(params)
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  addApplicant: (jobListingId, applicantId) => {
+    return new Promise ((resolve, reject) => {
+      jobListingModel.findOneAndUpdate({_id: jobListingId}, {$addToSet: {seekerIds: [applicantId]}})
         .then(result => {
           resolve(result);
         })

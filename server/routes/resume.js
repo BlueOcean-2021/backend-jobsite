@@ -2,10 +2,10 @@ const Router = require('express').Router;
 const db = require('../../database/controller/resume.js');
 
 const getResume =  (req, res, next) => {
-  if (!req.query.seekerId) {
+  if (!req.query.id) {
     res.sendStatus(422);
   } else {
-    db.findOne(req.query.seekerId)
+    db.findOne(req.query.id)
       .then(response => {
         res.json(response);
       })
@@ -16,9 +16,6 @@ const getResume =  (req, res, next) => {
 }
 
 const postResume = (req, res, next) => {
-  // const {
-  //   firstName, lastName, email, phone, zipcode, city, links, workExperience, certificates, education, other
-  // }
   if (!req.body.seekerId) {
     res.sendStatus(422);
   } else {
@@ -32,14 +29,13 @@ const postResume = (req, res, next) => {
   }
 }
 
-
 const updateResume = (req, res, next) => {
-  if (!req.body.seekId) {
+  if (!req.body.seekerId) {
     res.sendStatus(422);
   } else {
     db.updateOne(req.body)
-      .then(res => {
-        res.json(res.data.rows[0]);
+      .then(result => {
+        res.json(result);
       })
       .catch(err => {
         res.sendStatus(404);
@@ -51,7 +47,7 @@ const getAllResumes = (req, res, next) => {
   if (!req.body.filters) {
     db.findAll()
     .then(result => {
-      res.json(res.data.rows);
+      res.json(result);
     })
     .catch(err => {
       res.status(500).send(err)
@@ -59,7 +55,7 @@ const getAllResumes = (req, res, next) => {
   } else {
     db.findAllByFilter(req.body)
     .then(result => {
-      res.json(res.data.rows);
+      res.json(result);
     })
     .catch(err => {
       res.status(500).send(err)

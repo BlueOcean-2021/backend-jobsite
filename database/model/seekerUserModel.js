@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const db = require('../database.js');
 
+
+// Depricated, using seekerDataModel.js instead
+
 const seekerUserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -108,4 +111,6 @@ const seekerUserSchema = new mongoose.Schema({
   }
 });
 
-module.exports = seekerUserSchema;
+var seekerModel = mongoose.model('seeker', seekerUserSchema);
+
+module.exports = seekerModel;

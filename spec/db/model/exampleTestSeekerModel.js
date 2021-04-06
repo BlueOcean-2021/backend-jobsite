@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const seekerUserSchema = require('../../../database/model/seekerUserModel.js')
+const seeker = require('../../../database/model/seekerUserModel.js')
 
-const seeker = mongoose.model('resume', seekerUserSchema);
+// const seeker = mongoose.model('resume', seekerUserSchema);
 
 var test = {
   firstName: "Bob",
@@ -37,13 +37,13 @@ var test = {
 }
 
 
-// seeker.create(test)
-//   .then(() => console.log('test seeker insert complete'))
-//   .catch((err) => console.log(err));
+seeker.create(test)
+.then(() => console.log('test seeker insert complete'))
+.catch((err) => console.log(err));
 
-  seeker.find({})
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+seeker.find({})
+.then((res) => console.log(res))
+.catch((err) => console.log(err));
 
 
 
