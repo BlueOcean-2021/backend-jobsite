@@ -28,6 +28,24 @@ const seeker = {
     });
   },
 
+  findAllAppointments: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'appointments', resolve, reject);
+    });
+  },
+
+  findAllApplications: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'applications', resolve, reject);
+    });
+  },
+
+  findAllSavedJobs: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'savedJobs', resolve, reject);
+    });
+  },
+
   // add subdocument params: (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject)
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
