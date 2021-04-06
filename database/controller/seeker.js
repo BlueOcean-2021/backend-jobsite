@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-const { addSubdocumentToModel } = require('./reuse.js');
+const {
+  createModel,
+  addSubdocumentToModel,
+  deleteSubdocument,
+  updateSubdocument
+} = require('./reuse.js');
 const {
   AppointmentsModel,
   SeekerNoteModel,
@@ -12,17 +17,9 @@ const seeker = {
   // instatiate new seeker note document
   createSeekerModel: ({ email }) => {
     return new Promise((resolve, reject) => {
-      var newSeeker = new SeekerModel({ email })
-      newSeeker.save((err, response) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(response);
-        }
-      })
-    })
+      createModel(SeekerModel, { email }, resolve, reject);
+    });
   },
-
   // add subdocument params: (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject)
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
@@ -47,53 +44,54 @@ const seeker = {
       addSubdocumentToModel(SeekerModel, seekerId, SavedJobsModel, 'savedJobs', savedJobsObj, resolve, reject);
     });
   },
-
+  // delete subdocument params: (mainModel, mainId, childAttributeKey, childId, resolve, reject)
   deleteNote: (seekerId, noteId) => {
     return new Promise((resolve, reject) => {
-      SeekerModel.findOne({ _id: seekerId }, (err, result) => {
-        let currentSeeker = result;
-        currentSeeker.notes.findOneAndRemove({ _id: noteId }, (err, removedItem) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(removedItem);
-          }
-        });
-      });
+      deleteSubdocument(SeekerModel, seekerId, 'notes', noteId, resolve, reject);
     });
   },
+
+  deleteAppointment: (seekerId, appointmentId) => {
+    return new Promise((resolve, reject) => {
+      deleteSubdocument(SeekerModel, seekerId, 'appointments', appointmentId, resolve, reject);
+    });
+  },
+
+  deleteApplication: (seekerId, applicationId) => {
+    return new Promise((resolve, reject) => {
+      deleteSubdocument(SeekerModel, seekerId, 'applications', applicationId, resolve, reject);
+    });
+  },
+
+  deleteSavedJob: (seekerId, savedJobId) => {
+    return new Promise((resolve, reject) => {
+      deleteSubdocument(SeekerModel, seekerId, 'savedJobs', savedJobId, resolve, reject);
+    });
+  },
+  // update subdocument params: (mainModel, mainId, childAttributeKey, childId, updatedFields, resolve, reject)
   updateNote: (seekerId, noteId, updatedFields) => {
     return new Promise((resolve, reject) => {
-      SeekerModel.findOne({ _id: seekerId}, (err, result) => {
-        let currentSeeker = result;
-        currentSeeker.notes.findOneAndUpdate({ _id: noteId }, updatedFields, (err, preupdatedQuery) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(preupdatedQuery);
-          }
-        });
-      });
+      updateSubdocument(SeekerModel, seekerId, 'notes', noteId, updatedFields, resolve, reject);
     });
   },
-  // generic add subdocument
-  // addSubdocumentToModel: (mainModel, mainId, addChildModel, childAttribute, childObj) => {
-  //     return new Promise((resolve, reject) => {
-  //       mainModel.findOne({ _id: mainId }, (err, result) => {
-  //         let currentMain = result;
-  //         let newChild = new addChildModel(childObj);
-  //         currentMain[childAttribute].push(newChild);
-  //         currentMain.save((err, writtenChild) => {
-  //           if (err) {
-  //             reject(err);
-  //           } else {
-  //             resolve(writtenNote);
-  //           }
-  //         });
-  //       });
-  //     });
 
-  // }
+  updateAppointment: (seekerId, appointmentId, updatedFields) => {
+    return new Promise((resolve, reject) => {
+      updateSubdocument(SeekerModel, seekerId, 'appointments', appointmentId, updatedFields, resolve, reject);
+    });
+  },
+
+  updateApplication: (seekerId, applicationId, updatedFields) => {
+    return new Promise((resolve, reject) => {
+      updateSubdocument(SeekerModel, seekerId, 'applications', applicationId, updatedFields, resolve, reject);
+    });
+  },
+
+  updateSavedJob: (seekerId, savedJobId, updatedFields) => {
+    return new Promise((resolve, reject) => {
+      updateSubdocument(SeekerModel, seekerId, 'savedJobs', savedJobId, updatedFields, resolve, reject);
+    });
+  },
 }
 
 module.exports = seeker;

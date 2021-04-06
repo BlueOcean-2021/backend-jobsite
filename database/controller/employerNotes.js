@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
-const { addSubdocumentToModel, deleteSubdocument } = require('./reuse.js');
+const {
+  createModel,
+  addSubdocumentToModel,
+  deleteSubdocument,
+  updateSubdocument
+} = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
 const employer = {
   // instatiate new employer note document
   createEmployerNoteModel: ({ email }) => {
     return new Promise((resolve, reject) => {
-      var newEmployerNote = new EmployerNotesModel({ email })
-      newEmployerNote.save((err, response) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(response);
-        }
-      })
-    })
+      createModel(EmployerNotesModel, { email }, resolve, reject);
+    });
   },
   // add to specifc employer note document
   addNote: (employerNoteId, noteObj) => {
@@ -22,38 +20,16 @@ const employer = {
       addSubdocumentToModel(EmployerNotesModel, employerNoteId, Note, 'notes', noteObj, resolve, reject);
     });
   },
-
+  // delete a specifc employer note document
   deleteNote: (employerNoteId, noteId) => {
     return new Promise((resolve, reject) => {
       deleteSubdocument(EmployerNotesModel, employerNoteId, 'notes', noteId, resolve, reject);
-      // EmployerNotesModel.findOne({ _id: employerNoteId}, (err, result) => {
-      //   let currentEmployer = result;
-      //   currentEmployer.notes.pull({ _id: noteId });
-      //   currentEmployer.save((err, response) => {
-      //     if (err) {
-      //       reject(err);
-      //     } else {
-      //       resolve(response);
-      //     }
-      //   })
-      // });
     });
   },
+  // update a specifc employer note document
   updateNote: (employerNoteId, noteId, updatedFields) => {
     return new Promise((resolve, reject) => {
-      EmployerNotesModel.findOne({ _id: employerNoteId}, (err, result) => {
-        let currentEmployer = result;
-        for (let field in updatedFields) {
-          currentEmployer.notes.id(noteId)[field] = updatedFields[field];
-        }
-        currentEmployer.save((err, response) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(response);
-          }
-        });
-      });
+      updateSubdocument(EmployerNotesModel, employerNoteId, 'notes', noteId, updatedFields, resolve, reject);
     });
   }
 }

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const dbConnect = require('../database.js');
 
 const jobListingSchema = new mongoose.Schema({
-  // when referencing job listing id, use to string method
   employerId: { type: String, required: true },
   company: {
     type: String,

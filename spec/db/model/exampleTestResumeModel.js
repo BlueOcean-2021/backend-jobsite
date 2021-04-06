@@ -78,12 +78,12 @@ var test  = {
 };
 
 
-/*
+
 resumeModel.create(test)
   .then(() => console.log('test resume insert complete'))
   .catch((err) => console.log(err));
-  */
 
-resumeModel.find({})
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+
+// resumeModel.find({})
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));

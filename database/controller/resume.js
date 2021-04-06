@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
+const { createModel } = require('./reuse.js');
 const ResumeModel = require('../model/resumeModel.js');
 
 const resume = {
+
   createOne: (params) => {
     return new Promise ((resolve, reject) => {
-      ResumeModel.create(params)
-        .then(result => {
-          resolve(result)
-        })
-        .catch(err => {
-          reject(err);
-        })
-    })
+      createModel(ResumeModel, params, resolve, reject);
+    });
   },
+
   findOne: (seekerId) => {
     return new Promise((resolve, reject) => {
       ResumeModel.find({seekerId: seekerId})

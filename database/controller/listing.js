@@ -1,24 +1,19 @@
 const mongoose = require('mongoose');
-const jobListingModel = require('../model/jobListingModel.js');
+const JobListingModel = require('../model/JobListingModel.js');
+const { createModel } = require('./reuse.js');
 
 
 const listing = {
   // create new listing
   createOne:(params) => {
     return new Promise((resolve, reject) => {
-      jobListingModel.create(params)
-        .then(result => {
-          resolve(result);
-        })
-        .catch(err => {
-          reject(err);
-        });
+      createModel(JobListingModel, params, resolve, reject);
     });
   },
     // update one by listing _id
   updateOne: (jobListingId, update) => {
     return new Promise((resolve, reject) => {
-      jobListingModel.updateOne({_id: jobListingId}, update)
+      JobListingModel.updateOne({_id: jobListingId}, update)
         .then(result => {
           resolve(result);
         })
@@ -30,7 +25,7 @@ const listing = {
   // find one by listing _id'.
   findOne: (jobListingId) => {
     return new Promise((resolve, reject) => {
-      jobListingModel.findOne({_id: jobListingId})
+      JobListingModel.findOne({_id: jobListingId})
         .then(result => {
           resolve(result);
         })
@@ -53,7 +48,7 @@ const listing = {
   },
   getAll: () => {
     return new Promise((resolve, reject) => {
-      jobListingModel.find({})
+      JobListingModel.find({})
         .then(result => {
           resolve(result);
         })
@@ -67,7 +62,7 @@ const listing = {
   findAllByEmployer: (employerId) => {
     let options = employerId ? {_id: employerId} : {};
     return new Promise((resolve, reject) => {
-      jobListingModel.find(options)
+      JobListingModel.find(options)
         .then(result => {
           resolve(result);
         })
@@ -79,7 +74,7 @@ const listing = {
   //find all by filter option(s)
   findAllByFilter: (params) => {
     return new Promise ((resolve, reject) => {
-      jobListingModel.find(params)
+      JobListingModel.find(params)
         .then(result => {
           resolve(result);
         })
@@ -90,7 +85,7 @@ const listing = {
   },
   addApplicant: (jobListingId, applicantId) => {
     return new Promise ((resolve, reject) => {
-      jobListingModel.findOneAndUpdate({_id: jobListingId}, {$addToSet: {seekerIds: [applicantId]}})
+      JobListingModel.findOneAndUpdate({_id: jobListingId}, {$addToSet: {seekerIds: [applicantId]}})
         .then(result => {
           resolve(result);
         })

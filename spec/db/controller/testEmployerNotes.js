@@ -4,9 +4,10 @@ const employer = require('../../../database/controller/employerNotes.js');
 
 
 var params = { email: 'rdominguez0@admin.ch' };
+var params1 = { email: 'newTest@admin.ch' };
 
 let createTest = (params) => employer.createEmployerNoteModel(params);
-// createTest(params);
+// createTest(params1);
 
 var note1 = {
   category: 'interview',
@@ -26,4 +27,4 @@ let updateNoteTest1 = () => employer.updateNote('606be424876aa60a47957ecc', '606
 
 
 let deleteNoteTest1 = () => employer.deleteNote('606be424876aa60a47957ecc', '606becbf5e601359de1c03cc');
-deleteNoteTest1();
+// deleteNoteTest1();

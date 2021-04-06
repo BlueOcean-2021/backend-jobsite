@@ -1,4 +1,15 @@
 
+const createModel = (model, params, resolve, reject) => {
+  var newModel = new model(params);
+  newModel.save((err, response) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(response);
+    }
+  });
+};
+
 const addSubdocumentToModel = (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject) => {
   mainModel.findOne({ _id: mainId }, (err, result) => {
     let currentMain = result;
@@ -28,7 +39,27 @@ const deleteSubdocument = (mainModel, mainId, childAttributeKey, childId, resolv
   });
 };
 
+const updateSubdocument = (mainModel, mainId, childAttributeKey, childId, updatedFields, resolve, reject) => {
+  mainModel.findOne({ _id: mainId}, (err, result) => {
+    let currentMain = result;
+    for (let field in updatedFields) {
+      currentMain[childAttributeKey].id(childId)[field] = updatedFields[field];
+    }
+    currentMain.save((err, response) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+};
 
 
 
-module.exports = { addSubdocumentToModel, deleteSubdocument };
+module.exports = {
+  createModel,
+  addSubdocumentToModel,
+  deleteSubdocument,
+  updateSubdocument
+};
