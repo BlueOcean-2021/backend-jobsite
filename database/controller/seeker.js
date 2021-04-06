@@ -41,12 +41,17 @@ const seeker = {
   // },
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, (err, results) => {
-        if (err) { reject(err) };
-        resolve(results);
-      });
+      addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, resolve, reject)
     });
   },
+  // addNote: (seekerId, noteObj) => {
+  //   return new Promise((resolve, reject) => {
+  //     addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, (err, results) => {
+  //       if (err) { reject(err) };
+  //       resolve(results);
+  //     });
+  //   });
+  // },
   addAppointment: (seekerId, appointmentObj) => {
     return new Promise((resolve, reject) => {
       addSubdocumentToModel(SeekerModel, seekerId, AppointmentsModel, 'appointments', appointmentObj, (err, results) => {

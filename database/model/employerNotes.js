@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('../database.js');
+const dbConnect = require('../database.js');
 
 const noteSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now },
@@ -32,28 +32,6 @@ const employerNotesSchema = new mongoose.Schema({
     required: false,
     type: [noteSchema]
   }
-  // {
-  //   required: false,
-  //   type: [{
-  //     dateCreated: { type: Date, default: Date.now },
-  //     category: {
-  //       type: String,
-  //       enum: ['candidate', 'interview', 'listing', 'personal'],
-  //       required: true
-  //     },
-  //     title: {
-  //       type: String,
-  //       required: true,
-  //       minLength: 2,
-  //       maxLength: 50
-  //     },
-  //     body: {
-  //       type: String,
-  //       required: false,
-  //       maxLength: 500
-  //     },
-  //   }]
-  // },
 });
 
 const EmployerNotesModel = mongoose.model('employerNotes', employerNotesSchema);

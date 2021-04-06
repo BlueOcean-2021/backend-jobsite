@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('../database.js');
+const dbConnect = require('../database.js');
 const { fieldsOfStudy } = require('./enums.js');
 
 const resumeSchema = new mongoose.Schema({

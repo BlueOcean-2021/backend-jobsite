@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('../database.js');
+const dbConnect = require('../database.js');
 
 const appointmentsSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now },
@@ -74,86 +74,23 @@ const seekerDataSchema = new mongoose.Schema({
   appointments: {
     required: false,
     type: [appointmentsSchema]
-    // type: [{
-    //   dateCreated: { type: Date, default: Date.now },
-    //   startTime: { type: Date, required: true },
-    //   endTime: { type: Date, required: true },
-    //   category: {
-    //     type: String,
-    //     enum: ['interview', 'phoneScreen', 'personal'],
-    //     required: true
-    //   },
-    //   title: {
-    //     type: String,
-    //     required: true,
-    //     maxLength: 50
-    //   },
-    //   appointmentNote: {
-    //     type: String,
-    //     required: false,
-    //     maxLength: 1000
-    //   }
-    // }]
   },
   notes: {
     required: false,
     type: [seekerNoteSchema]
-  // notes: {
-  //   required: false,
-  //   type: [{
-  //     dateCreated: {
-  //       type: Date,
-  //       default: Date.now
-  //     },
-  //     category: {
-  //       type: String,
-  //       enum: ['listing', 'interview', 'application', 'personal', 'company'],
-  //       required: true
-  //     },
-  //     title: {
-  //       type: String,
-  //       required: true,
-  //       minLength: 2,
-  //       maxLength: 50
-  //     },
-  //     body: {
-  //       type: String,
-  //       required: false,
-  //       maxLength: 500
-  //     },
-  //   }]
   },
   applications: {
     required: false,
     type: [applicationsSchema]
-    // required: false,
-    // type: [{
-    //   dateCreated: {type: Date, default: Date.now},
-    //   status: {
-    //     required: true,
-    //     type: String,
-    //     enum: ['started', 'submited', 'rejected', 'interview', 'pending']},
-    //   jobListingId: {required: true, type: String }
-    // }]
   },
   savedJobs: {
     required: false,
     type: [savedJobsSchema]
-    // type: [{
-    //   jobListingId: { required: true, type: String },
-    //   interestLevel: {
-    //     type: String,
-    //     enum: ['1', '2', '3'],
-    //     required: true
-    //   }
-    // }]
   }
 });
 
-
-
 const AppointmentsModel = mongoose.model('Appointments', appointmentsSchema);
-const SeekerNoteModel = mongoose.model('SeekerNotes', seekerNotesSchema);
+const SeekerNoteModel = mongoose.model('SeekerNote', seekerNoteSchema);
 const ApplicationsModel = mongoose.model('Applications', applicationsSchema);
 const SavedJobsModel = mongoose.model('SavedJobs', savedJobsSchema);
 const SeekerModel = mongoose.model('Seeker', seekerDataSchema);
