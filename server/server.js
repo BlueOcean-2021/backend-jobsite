@@ -1,11 +1,16 @@
 const express = require('express');
 const { application } = require('../config');
+
+// router
 const listingRoutes = require('./routes/listing.js');
 const resumeRoutes = require('./routes/resume.js');
+const seekerDataRoutes = require('./routes/seekerData.js');
 
 const app = express();
 
 app.use(express.static('client/dist'));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // if using router
@@ -30,6 +35,17 @@ const {
   deleteResume
 } = resumeRoutes;
 
+// api/seekerData
+app.use('/api/seekerdata', seekerDataRoutes)
+app.use('/api/employerdata', seekerDataRoutes)
+app.use('/api/joblisting', seekerDataRoutes)
+app.use('/api/resume', seekerDataRoutes)
+
+
+
+
+
+
 app.get('/api/listing', getListing);
 app.get('/api/listing/all', getAllListings);
 app.post('/api/listing', postListing);
@@ -47,3 +63,4 @@ app.get('/api/resume/all', getAllResumes);
 app.listen(application.port, () => {
   console.log('Client server listening on ' + application.port)
 });
+

@@ -71,7 +71,7 @@ module.exports = { test1, test2, test3, test4 };
         "endDate": "2018-02-10",
         "description": "Tempus urna et pharetra pharetra massa. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Fermentum leo vel orci porta non. Eu consequat ac felis donec et odio pellentesque diam."
       }
-    ]
+    ],
     "certificates": [
       {
         "licenseNum": "1005240832c",

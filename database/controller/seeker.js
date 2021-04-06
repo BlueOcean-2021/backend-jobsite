@@ -3,7 +3,8 @@ const {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-  updateSubdocument
+  updateSubdocument,
+  findInSubdocument
 } = require('./reuse.js');
 const {
   AppointmentsModel,
@@ -20,10 +21,17 @@ const seeker = {
       createModel(SeekerModel, { email }, resolve, reject);
     });
   },
+
+  findAllNotes: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findInSubdocument(SeekerModel, seekerId, 'notes', {}, resolve, reject);
+    });
+  },
+
   // add subdocument params: (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject)
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, resolve, reject)
+      addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, resolve, reject);
     });
   },
 

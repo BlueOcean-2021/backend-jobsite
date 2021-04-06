@@ -19,8 +19,8 @@ var note2 = {
   title: 'YYOOOOOOOOOOOOOO',
 }
 
-let addNoteTest1 = () => employer.addNote('606be424876aa60a47957ecc', note1);
-// addNoteTest1();
+let addNoteTest1 = () => employer.addNote('606b580185bfed0c291b97e4', note1);
+//addNoteTest1();
 
 let updateNoteTest1 = () => employer.updateNote('606be424876aa60a47957ecc', '606be46035afd70c7888897d', note2)
 // updateNoteTest1();

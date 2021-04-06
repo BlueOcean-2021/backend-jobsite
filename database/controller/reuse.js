@@ -55,11 +55,26 @@ const updateSubdocument = (mainModel, mainId, childAttributeKey, childId, update
   });
 };
 
+const findInSubdocument = (mainModel, mainId, childAttributeKey, params, resolve, reject) => {
+  mainModel.findOne({ _id: mainId}, (err, result) => {
+    let currentMain = result;
+    currentMain[childAttributeKey].find(params)
+    .then(result => resolve(result))
+    .catch(err => reject(err))
+  })
+};
 
+const findInDb = (mainModel, params, resolve, reject) => {
+  mainModel.find(params)
+    .then(result => resolve(result))
+    .catch(err => reject(err))
+};
 
 module.exports = {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-  updateSubdocument
+  updateSubdocument,
+  findInSubdocument,
+  findInDb
 };

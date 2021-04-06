@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const seeker = require('../../../database/controller/seeker.js');
 
 
-var params = { email: 'test20@admin.ch' };
+var params = { email: 'rdominguez0@admin.ch' };
 
 let createTest = (params) => seeker.createSeekerModel(params);
 createTest(params);
@@ -23,8 +23,8 @@ var noteUpdate1 = {
   title: 'YYOOOOOOOOOOOOOO',
 }
 
-let addNoteTest1 = () => seeker.addNote('606bea306feca44119bfbac8', note2);
-// addNoteTest1();
+let addNoteTest1 = () => seeker.addNote('606b5823b011d60c47d17adb', note2);
+//addNoteTest1();
 
 let updateNoteTest1 = () => seeker.updateNote('606bea306feca44119bfbac8', '606bea99482eac4509f1d03d', noteUpdate1)
 // updateNoteTest1();

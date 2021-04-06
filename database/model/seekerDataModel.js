@@ -70,7 +70,6 @@ const seekerDataSchema = new mongoose.Schema({
     maxLength: 255,
     required: true
   },
-  ifResumePublic: { type: Boolean, default: false },
   appointments: {
     required: false,
     type: [appointmentsSchema]

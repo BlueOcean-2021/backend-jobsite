@@ -127,7 +127,8 @@ const resumeSchema = new mongoose.Schema({
     required: false,
     maxLength: 500
   },
-  dateCreated: { type: Date, default: Date.now }
+  dateCreated: { type: Date, default: Date.now },
+  ifResumePublic: { type: Boolean, default: false },
 });
 
 const ResumeModel = mongoose.model('resume', resumeSchema);

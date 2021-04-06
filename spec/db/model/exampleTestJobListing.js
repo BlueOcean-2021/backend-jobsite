@@ -38,10 +38,10 @@ test2 = {
   companyDescription: 'Bibendum est ultricies integer quis auctor elit sed vulputate. Blandit cursus risus at ultrices mi.'
 }
 
-jobListingModel.create(test2)
-.then(res => console.log(`job lised in db:  ${res}`))
-.catch((err) => console.log(err));
+//jobListingModel.create(test2)
+//.then(res => console.log(`job lised in db:  ${res}`))
+//.catch((err) => console.log(err));
 
-//  jobListingModel.find({})
-//    .then((res) => console.log(res))
-//    .catch((err) => console.log(err));
+jobListingModel.find({})
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));

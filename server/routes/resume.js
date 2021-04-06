@@ -1,11 +1,11 @@
 const Router = require('express').Router;
-const db = require('../../database/controller/resume.js');
+const dbConnect = require('../../database/controller/resume.js');
 
 const getResume =  (req, res, next) => {
   if (!req.query.id) {
     res.sendStatus(422);
   } else {
-    db.findOne(req.query.id)
+    dbConnect.findOne(req.query.id)
       .then(response => {
         res.json(response);
       })
@@ -19,7 +19,7 @@ const postResume = (req, res, next) => {
   if (!req.body.seekerId) {
     res.sendStatus(422);
   } else {
-    db.createOne(req.body)
+    dbConnect.createOne(req.body)
       .then(response => {
         res.json(response);
       })
@@ -33,7 +33,8 @@ const updateResume = (req, res, next) => {
   if (!req.body.seekerId) {
     res.sendStatus(422);
   } else {
-    db.updateOne(req.body)
+    //if
+    dbConnect.updateOne(req.body)
       .then(result => {
         res.json(result);
       })
@@ -45,7 +46,7 @@ const updateResume = (req, res, next) => {
 
 const getAllResumes = (req, res, next) => {
   if (!req.body.filters) {
-    db.findAll()
+    dbConnect.findAll()
     .then(result => {
       res.json(result);
     })
@@ -53,7 +54,7 @@ const getAllResumes = (req, res, next) => {
       res.status(500).send(err)
     })
   } else {
-    db.findAllByFilter(req.body)
+    dbConnect.findAllByFilter(req.body)
     .then(result => {
       res.json(result);
     })
@@ -67,7 +68,7 @@ const deleteResume = (req, res, next) => {
   if (!req.query.id) {
     res.sendStatus(422);
   } else {
-    db.deleteOne(req.query.id)
+    dbConnect.deleteOne(req.query.id)
       .then(res => {
         res.json(res);
       })

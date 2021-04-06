@@ -7,7 +7,7 @@ const {
 } = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
-const employer = {
+const employerNote = {
   // instatiate new employer note document
   createEmployerNoteModel: ({ email }) => {
     return new Promise((resolve, reject) => {
@@ -34,4 +34,4 @@ const employer = {
   }
 }
 
-module.exports = employer;
+module.exports = employerNote;
