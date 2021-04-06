@@ -25,5 +25,5 @@ let updateNoteTest1 = () => employer.updateNote('606be424876aa60a47957ecc', '606
 // updateNoteTest1();
 
 
-let deleteNoteTest1 = () => employer.deleteNote('606be424876aa60a47957ecc', '606be46035afd70c7888897d');
-// deleteNoteTest1();
+let deleteNoteTest1 = () => employer.deleteNote('606be424876aa60a47957ecc', '606becbf5e601359de1c03cc');
+deleteNoteTest1();

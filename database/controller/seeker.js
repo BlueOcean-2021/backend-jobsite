@@ -22,58 +22,29 @@ const seeker = {
       })
     })
   },
-  // add to specifc seeker document
-  // addNote: (seekerId, noteObj) => {
-  //   return new Promise((resolve, reject) => {
-  //     SeekerModel.findOne({ _id: seekerId }, (err, result) => {
-  //       let currentSeeker = result;
-  //       let newNote = new SeekerNoteModel(noteObj);
-  //       currentSeeker.notes.push(newNote);
-  //       currentSeeker.save((err, writtenNote) => {
-  //         if (err) {
-  //           reject(err);
-  //         } else {
-  //           resolve(writtenNote);
-  //         }
-  //       });
-  //     });
-  //   });
-  // },
+
+  // add subdocument params: (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject)
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
       addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, resolve, reject)
     });
   },
-  // addNote: (seekerId, noteObj) => {
-  //   return new Promise((resolve, reject) => {
-  //     addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, (err, results) => {
-  //       if (err) { reject(err) };
-  //       resolve(results);
-  //     });
-  //   });
-  // },
+
   addAppointment: (seekerId, appointmentObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(SeekerModel, seekerId, AppointmentsModel, 'appointments', appointmentObj, (err, results) => {
-        if (err) { reject(err) };
-        resolve(results);
-      });
+      addSubdocumentToModel(SeekerModel, seekerId, AppointmentsModel, 'appointments', appointmentObj, resolve, reject);
     });
   },
+
   addApplication: (seekerId, applicationObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(SeekerModel, seekerId, ApplicationsModel, 'applications', applicationObj, (err, results) => {
-        if (err) { reject(err) };
-        resolve(results);
-      });
+      addSubdocumentToModel(SeekerModel, seekerId, ApplicationsModel, 'applications', applicationObj, resolve, reject);
     });
   },
+
   addSavedJob: (seekerId, savedJobsObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(SeekerModel, seekerId, SavedJobsModel, 'savedJobs', savedJobsObj, (err, results) => {
-        if (err) { reject(err) };
-        resolve(results);
-      });
+      addSubdocumentToModel(SeekerModel, seekerId, SavedJobsModel, 'savedJobs', savedJobsObj, resolve, reject);
     });
   },
 

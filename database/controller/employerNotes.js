@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { addSubdocumentToModel } = require('./reuse.js');
+const { addSubdocumentToModel, deleteSubdocument } = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
 const employer = {
@@ -22,35 +22,21 @@ const employer = {
       addSubdocumentToModel(EmployerNotesModel, employerNoteId, Note, 'notes', noteObj, resolve, reject);
     });
   },
-  // addNote: (employerNoteId, noteObj) => {
-  //   return new Promise((resolve, reject) => {
-  //     EmployerNotesModel.findOne({ _id: employerNoteId}, (err, result) => {
-  //       let currentEmployer = result;
-  //       let newNote = new Note(noteObj);
-  //       currentEmployer.notes.push(newNote);
-  //       currentEmployer.save((err, writtenNote) => {
-  //         if (err) {
-  //           reject(err);
-  //         } else {
-  //           resolve(writtenNote)
-  //         }
-  //       });
-  //     });
-  //   });
-  // },
+
   deleteNote: (employerNoteId, noteId) => {
     return new Promise((resolve, reject) => {
-      EmployerNotesModel.findOne({ _id: employerNoteId}, (err, result) => {
-        let currentEmployer = result;
-        currentEmployer.notes.pull({ _id: noteId });
-        currentEmployer.save((err, response) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(response);
-          }
-        })
-      });
+      deleteSubdocument(EmployerNotesModel, employerNoteId, 'notes', noteId, resolve, reject);
+      // EmployerNotesModel.findOne({ _id: employerNoteId}, (err, result) => {
+      //   let currentEmployer = result;
+      //   currentEmployer.notes.pull({ _id: noteId });
+      //   currentEmployer.save((err, response) => {
+      //     if (err) {
+      //       reject(err);
+      //     } else {
+      //       resolve(response);
+      //     }
+      //   })
+      // });
     });
   },
   updateNote: (employerNoteId, noteId, updatedFields) => {
