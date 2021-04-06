@@ -4,7 +4,7 @@ const {
   addSubdocumentToModel,
   deleteSubdocument,
   updateSubdocument,
-  findInSubdocument
+  findAllInSubdocument
 } = require('./reuse.js');
 const {
   AppointmentsModel,
@@ -24,7 +24,25 @@ const seeker = {
 
   findAllNotes: ({ seekerId }) => {
     return new Promise((resolve, reject) => {
-      findInSubdocument(SeekerModel, seekerId, 'notes', {}, resolve, reject);
+      findAllInSubdocument(SeekerModel, seekerId, 'notes', resolve, reject);
+    });
+  },
+
+  findAllAppointments: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'appointments', resolve, reject);
+    });
+  },
+
+  findAllApplications: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'applications', resolve, reject);
+    });
+  },
+
+  findAllSavedJobs: ({ seekerId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(SeekerModel, seekerId, 'savedJobs', resolve, reject);
     });
   },
 

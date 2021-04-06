@@ -4,8 +4,11 @@ const seeker = require('../../../database/controller/seeker.js');
 
 var params = { email: 'rdominguez0@admin.ch' };
 
-let createTest = (params) => seeker.createSeekerModel(params);
-createTest(params);
+let createTest = (params) => {
+  seeker.createSeekerModel(params)
+    .then(res => console.log(res))
+    .catch(res => console.log(res))
+};
 
 var note1 = {
   category: 'interview',
