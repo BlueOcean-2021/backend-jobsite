@@ -38,7 +38,7 @@ var test  = {
     "personal":"https://www.npmjs.com/package/mysql"
   },
   "city":"Doctor Juan León Mallorquín",
-  "zipcode":"7092192",
+  "zipcode":"72192",
   "education": [
     {
       "institution": "University of Miami",

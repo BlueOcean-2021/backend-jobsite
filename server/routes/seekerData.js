@@ -6,7 +6,10 @@ const { seeker } = require('../../database/controller');
 router.post('/newseeker', (req, res, next) => {
   let { email } = req.body;
   seeker.createSeekerModel({ email })
-    .then(() => res.send(201))
+    .then((result) =>{
+      console.log(result._id)
+      res.send(result._id)
+    })
     .catch(err => res.send(403));
 });
 
