@@ -1,10 +1,6 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
-const db = require('../database/database.js');
-// potentially convert to router later
-// const resumeRoutes = require('./routes/resume.js');
-const resumeRoutes = require('./routes/resume.js');
-const listingRoutes = require('./routes/listing.js');
+const { application } = require('../config')
+
 const app = express();
 
 app.use(express.static('client/dist'));
@@ -46,7 +42,6 @@ app.put('/api/resume', updateResume);
 app.delete('/api/resume', deleteResume);
 app.get('/api/resume/all', getAllResumes);
 
-
-app.listen(process.env.PORT, () => {
-  console.log('Client server listening on 3001')
+app.listen(application.port, () => {
+  console.log('Client server listening on ' + application.port)
 });
