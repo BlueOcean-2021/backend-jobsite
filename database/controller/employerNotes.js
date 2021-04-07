@@ -3,12 +3,11 @@ const {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-<<<<<<< HEAD
   updateSubdocument
-=======
   updateSubdocument,
   findAllInSubdocument
->>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
+  updateSubdocument,
+  findAllInSubdocument
 } = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
@@ -19,15 +18,12 @@ const employerNote = {
       createModel(EmployerNotesModel, { email }, resolve, reject);
     });
   },
-<<<<<<< HEAD
-=======
   // list all employer notes
   findAllNotes: ({ employerNoteId }) => {
     return new Promise((resolve, reject) => {
       findAllInSubdocument(EmployerNotesModel, employerNoteId, 'notes', resolve, reject);
     });
   },
->>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
   // add to specifc employer note document
   addNote: (employerNoteId, noteObj) => {
     return new Promise((resolve, reject) => {

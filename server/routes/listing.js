@@ -17,15 +17,15 @@ const getListing =  (req, res, next) => {
 
 const postListing = (req, res, next) => {
   //needs employerId
-  if (!req.body.id) {
+  if (!req.body.employerId) {
     res.sendStatus(422);
   } else {
     listing.createOne(req.body)
-      .then(res => {
-        res.json(res);
+      .then(response => {
+        res.status(204).json(response);
       })
       .catch(err => {
-        res.sendStatus(404);
+        res.status(404).send(err);
       })
   }
 }
