@@ -8,4 +8,4 @@ EXPOSE 5000
 
 RUN yarn install --frozen-lockfile
 
-CMD ["node", "server.js"]
+CMD ["node", "server/server.js"]
