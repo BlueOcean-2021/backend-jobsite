@@ -4,7 +4,8 @@ const {
   addSubdocumentToModel,
   deleteSubdocument,
   updateSubdocument,
-  findAllInSubdocument
+  findAllInSubdocument,
+  filterSubdocument
 } = require('./reuse.js');
 const {
   AppointmentsModel,
@@ -21,6 +22,25 @@ const seeker = {
       createModel(SeekerModel, { email }, resolve, reject);
     });
   },
+
+  filterNotes: (seekerId, params) => {
+    return new Promise((resolve, reject) => {
+      filterSubdocument(SeekerModel, seekerId, 'notes', params, resolve, reject)
+    });
+  },
+  // filterNotes: (seekerId, params) => {
+  //   return new Promise((resolve, reject) => {
+  //     SeekerModel.aggregate([
+  //       { $match: { _id: new mongoose.Types.ObjectId(seekerId) }},
+  //       { $unwind: '$notes' },
+  //       { $match: {'notes.category': params.category} }
+  //     ])
+  //       .exec((err, result) => {
+  //         if (err) { reject(err) };
+  //         resolve(result);
+  //     });
+  //   });
+  // },
 
   findAllNotes: ({seekerId}) => {
     return new Promise((resolve, reject) => {

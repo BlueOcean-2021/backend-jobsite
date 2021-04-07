@@ -23,14 +23,21 @@ var note2 = {
   body: 'OMG OMG OMG',
 }
 
-var noteUpdate1 = {
-  title: 'YYOOOOOOOOOOOOOO',
+var note3 = {
+  category: 'application',
+  title: 'OMG OMG OMG',
+  body: 'OMG OMG OMG',
 }
 
-let addNoteTest1 = () => seeker.addNote('606ce570ce0bef34e9f831bb', note1).then(res=>console.log(res));
+var noteUpdate1 = {
+  title: 'YYOOOOOOOOOOOOOO',
+  body: 'IT UPDATED IT UPDATED'
+}
+
+let addNoteTest1 = () => seeker.addNote('606ce570ce0bef34e9f831bb', note3).then(res=>console.log(res));
 // addNoteTest1();
 
-let updateNoteTest1 = () => seeker.updateNote('606bea306feca44119bfbac8', '606bea99482eac4509f1d03d', noteUpdate1)
+let updateNoteTest1 = () => seeker.updateNote('606ce570ce0bef34e9f831bb', '606ce5a5e22ec2370fa1ed8a', noteUpdate1).then(res=>console.log(res));
 // updateNoteTest1();
 
 
@@ -39,4 +46,6 @@ let deleteNoteTest1 = () => seeker.deleteNote('606bea306feca44119bfbac8', '606be
 
 let findAll = () => seeker.findAllNotes({seekerId: '606ce570ce0bef34e9f831bb'}).then(res => console.log(res))
 
-findAll();
+let filterParams = { category: 'application' };
+let filter = () => seeker.filterNotes('606ce570ce0bef34e9f831bb', filterParams).then(res => console.log(res))
+filter();
