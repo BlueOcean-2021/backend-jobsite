@@ -4,12 +4,8 @@ const {
   addSubdocumentToModel,
   deleteSubdocument,
   updateSubdocument,
-<<<<<<< HEAD
   findAllInSubdocument,
   filterSubdocument
-=======
-  findAllInSubdocument
->>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
 } = require('./reuse.js');
 const {
   AppointmentsModel,
@@ -27,30 +23,31 @@ const seeker = {
     });
   },
 
-<<<<<<< HEAD
   filterNotes: (seekerId, params) => {
     return new Promise((resolve, reject) => {
       filterSubdocument(SeekerModel, seekerId, 'notes', params, resolve, reject)
     });
   },
-  // filterNotes: (seekerId, params) => {
-  //   return new Promise((resolve, reject) => {
-  //     SeekerModel.aggregate([
-  //       { $match: { _id: new mongoose.Types.ObjectId(seekerId) }},
-  //       { $unwind: '$notes' },
-  //       { $match: {'notes.category': params.category} }
-  //     ])
-  //       .exec((err, result) => {
-  //         if (err) { reject(err) };
-  //         resolve(result);
-  //     });
-  //   });
-  // },
+
+  filterAppointments: (seekerId, params) => {
+    return new Promise((resolve, reject) => {
+      filterSubdocument(SeekerModel, seekerId, 'appointments', params, resolve, reject)
+    });
+  },
+
+  filterApplications: (seekerId, params) => {
+    return new Promise((resolve, reject) => {
+      filterSubdocument(SeekerModel, seekerId, 'applications', params, resolve, reject)
+    });
+  },
+
+  filterSavedJobs: (seekerId, params) => {
+    return new Promise((resolve, reject) => {
+      filterSubdocument(SeekerModel, seekerId, 'savedJobs', params, resolve, reject)
+    });
+  },
 
   findAllNotes: ({seekerId}) => {
-=======
-  findAllNotes: ({ seekerId }) => {
->>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
     return new Promise((resolve, reject) => {
       findAllInSubdocument(SeekerModel, seekerId, 'notes', resolve, reject);
     });
