@@ -4,8 +4,12 @@ const {
   addSubdocumentToModel,
   deleteSubdocument,
   updateSubdocument,
+<<<<<<< HEAD
   findAllInSubdocument,
   filterSubdocument
+=======
+  findAllInSubdocument
+>>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
 } = require('./reuse.js');
 const {
   AppointmentsModel,
@@ -23,6 +27,7 @@ const seeker = {
     });
   },
 
+<<<<<<< HEAD
   filterNotes: (seekerId, params) => {
     return new Promise((resolve, reject) => {
       filterSubdocument(SeekerModel, seekerId, 'notes', params, resolve, reject)
@@ -43,6 +48,9 @@ const seeker = {
   // },
 
   findAllNotes: ({seekerId}) => {
+=======
+  findAllNotes: ({ seekerId }) => {
+>>>>>>> 8c5240bf790cabc69eb9c417676faabd519fd601
     return new Promise((resolve, reject) => {
       findAllInSubdocument(SeekerModel, seekerId, 'notes', resolve, reject);
     });
