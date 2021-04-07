@@ -3,7 +3,7 @@ const {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-  filterSubdocument
+  filterSubdocument,
   updateSubdocument,
   findAllInSubdocument
 } = require('./reuse.js');
