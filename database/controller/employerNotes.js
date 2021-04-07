@@ -3,7 +3,8 @@ const {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-  updateSubdocument
+  updateSubdocument,
+  findAllInSubdocument
 } = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
@@ -12,6 +13,12 @@ const employerNote = {
   createEmployerNoteModel: ({ email }) => {
     return new Promise((resolve, reject) => {
       createModel(EmployerNotesModel, { email }, resolve, reject);
+    });
+  },
+  // list all employer notes
+  findAllNotes: ({ employerNoteId }) => {
+    return new Promise((resolve, reject) => {
+      findAllInSubdocument(EmployerNotesModel, employerNoteId, 'notes', resolve, reject);
     });
   },
   // add to specifc employer note document
