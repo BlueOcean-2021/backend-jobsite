@@ -3,9 +3,7 @@ const {
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,
-  updateSubdocument
-  updateSubdocument,
-  findAllInSubdocument
+  filterSubdocument
   updateSubdocument,
   findAllInSubdocument
 } = require('./reuse.js');
@@ -16,6 +14,12 @@ const employerNote = {
   createEmployerNoteModel: ({ email }) => {
     return new Promise((resolve, reject) => {
       createModel(EmployerNotesModel, { email }, resolve, reject);
+    });
+  },
+  // filters note category
+  filterNotes: (employerNoteId, params) => {
+    return new Promise((resolve, reject) => {
+      filterSubdocument(EmployerNotesModel, employerNoteId, 'notes', params, resolve, reject)
     });
   },
   // list all employer notes
