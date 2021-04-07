@@ -103,7 +103,7 @@ const resumeSchema = new mongoose.Schema({
         type: String,
         required: false,
         minLength: 2,
-        maxLength: 200
+        maxLength: 500
       },
     }]
   },

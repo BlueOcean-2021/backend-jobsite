@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 
 const createModel = (model, params, resolve, reject) => {
   var newModel = new model(params);
@@ -55,6 +56,21 @@ const updateSubdocument = (mainModel, mainId, childAttributeKey, childId, update
   });
 };
 
+// single fitler only
+const filterSubdocument = (mainModel, mainId, childAttributeKey, params, resolve, reject) => {
+  let target = Object.keys(params)[0];
+  let targetValue = Object.values(params)[0];
+  mainModel.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(mainId) }},
+    { $unwind: `$${childAttributeKey}` },
+    { $match: { [ `${childAttributeKey}.${target}` ]: targetValue } }
+  ])
+    .exec((err, result) => {
+      if (err) { reject(err) };
+      resolve(result);
+  });
+};
+
 const findAllInSubdocument = (mainModel, mainId, childAttributeKey, resolve, reject) => {
   mainModel.findOne({ _id: mainId}, (err, result) => {
     let currentMain = result;
@@ -74,6 +90,7 @@ module.exports = {
   addSubdocumentToModel,
   deleteSubdocument,
   updateSubdocument,
+  filterSubdocument,
   findAllInSubdocument,
   findInDb
 };

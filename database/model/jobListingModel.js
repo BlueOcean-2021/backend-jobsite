@@ -5,7 +5,7 @@ const jobListingSchema = new mongoose.Schema({
   employerId: { type: String, required: true },
   company: {
     type: String,
-    equired: true,
+    required: true,
     trim: true,
     minLength: 2,
     maxLength: 40

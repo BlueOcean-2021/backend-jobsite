@@ -1,12 +1,14 @@
 const express = require('express');
 const { application } = require('../config');
+const cors = require('cors');
 
 // router
 const listingRoutes = require('./routes/listing.js');
 const resumeRoutes = require('./routes/resume.js');
 const seekerDataRoutes = require('./routes/seekerData.js');
-
+const employerRoutes = require('./routes/employerData.js');
 const app = express();
+app.use(cors());
 
 app.use(express.static('client/dist'));
 
@@ -36,11 +38,10 @@ const {
 } = resumeRoutes;
 
 // api/seekerData
-app.use('/api/seekerdata', seekerDataRoutes)
-app.use('/api/employerdata', seekerDataRoutes)
-app.use('/api/joblisting', seekerDataRoutes)
-app.use('/api/resume', seekerDataRoutes)
-
+app.use('/api/seekerdata', seekerDataRoutes);
+// app.use('/api/joblisting', XXX)
+// app.use('/api/resume', XXXX)
+app.use('/api/employerdata', employerRoutes);
 
 
 
