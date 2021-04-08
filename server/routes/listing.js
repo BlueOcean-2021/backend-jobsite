@@ -17,12 +17,15 @@ const getListing =  (req, res, next) => {
 
 const postListing = (req, res, next) => {
   //needs employerId
+  console.log(req.body);
   if (!req.body.employerId) {
     res.sendStatus(422);
   } else {
     listing.createOne(req.body)
       .then(response => {
-        res.status(204).json(response);
+        res.status(204).send({
+          status: 'OK'
+        });
       })
       .catch(err => {
         res.status(404).send(err);
@@ -85,10 +88,10 @@ const deleteListing = (req, res, next) => {
   } else {
     listing.deleteOne(req.query.id)
       .then(result => {
-        res.json(result);
+        res.status(204).send({status: 'OK'});
       })
       .catch(err => {
-        res.sendStatus(404);
+        res.status(404).send(err);
       })
   }
 };
