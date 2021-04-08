@@ -23,6 +23,16 @@ const seeker = {
     });
   },
 
+  // getAllData: ({ seekerId })=> {
+  //   return new Promise((resolve, reject) => {
+
+
+
+  //     findAllInSubdocument(SeekerModel, seekerId, 'notes', resolve, reject);
+  //   });
+  // },
+
+
   filterNotes: (seekerId, params) => {
     return new Promise((resolve, reject) => {
       filterSubdocument(SeekerModel, seekerId, 'notes', params, resolve, reject)
