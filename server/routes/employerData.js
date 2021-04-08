@@ -24,7 +24,7 @@ router.post('/newemployer', (req, res, next) => {
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
   let { employerId } = req.body;
-  seeker.findAllNotes({ seekerId })
+  seeker.findAllNotes({ employerId })
     .then(result => {
       res.status(200).send({
         status: 'OK',
@@ -36,8 +36,8 @@ router.get('/note/all', (req, res, next) => {
 
 // ________________update a note
 router.patch('/note', (req, res, next) => {
-  let { seekerId, noteId, updatedFields } = req.body;
-  seeker.updateNote(seekerId, noteId, updatedFields)
+  let { employerId, noteId, updatedFields } = req.body;
+  seeker.updateNote(employerId, noteId, updatedFields)
     .then(result => {
       res.status(202).send({
         status: 'OK',
@@ -49,8 +49,8 @@ router.patch('/note', (req, res, next) => {
 
 // ________________delete a note
 router.delete('/note', (req, res, next) => {
-  let {seekerId, noteId} = req.body;
-  seeker.deleteNote(seekerId, noteId)
+  let {employerId, noteId} = req.body;
+  seeker.deleteNote(employerId, noteId)
     .then(result => {
       res.sendStatus(204)
     })
