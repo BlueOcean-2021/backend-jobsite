@@ -19,5 +19,24 @@ jobs:
       - name: Package install
         run: yarn install --frozen-lockfile
 
-      - name: Docker build
-        run: docker build -t jobs-api:1.0 .
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: $${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: ECR Login
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Docker build and push
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          ECR_REPOSITORY: jobs-api
+          IMAGE_TAG: 1.0
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+
