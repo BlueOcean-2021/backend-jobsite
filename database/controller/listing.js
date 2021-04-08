@@ -49,7 +49,7 @@ const listing = {
   // delete one by listing _id
   deleteOne: (jobListingId) => {
     return new Promise((resolve, reject) => {
-      jobListingMode.deleteOne({_id: jobListingId})
+      jobListingModel.deleteOne({_id: jobListingId})
         .then(result => resolve(result))
         .catch(err => reject(err));
     });
