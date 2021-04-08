@@ -30,7 +30,8 @@ const seekerNoteSchema = new mongoose.Schema({
   category: {
     type: String,
     enum: ['listing', 'interview', 'application', 'personal', 'company'],
-    required: true
+    required: true,
+    default: 'personal'
   },
   title: {
     type: String,
