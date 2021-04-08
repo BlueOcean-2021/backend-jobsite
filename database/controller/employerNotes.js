@@ -34,27 +34,27 @@ const employerNote = {
     });
   },
   // list all employer notes
-  findAllNotes: ({ employerNoteId }) => {
+  findAllNotes: ({ employerId }) => {
     return new Promise((resolve, reject) => {
-      findAllInSubdocument(EmployerNotesModel, employerNoteId, 'notes', resolve, reject);
+      findAllInSubdocument(EmployerNotesModel, employerId, 'notes', resolve, reject);
     });
   },
   // add to specifc employer note document
-  addNote: (employerNoteId, noteObj) => {
+  addNote: (employerId, noteObj) => {
     return new Promise((resolve, reject) => {
-      addSubdocumentToModel(EmployerNotesModel, employerNoteId, Note, 'notes', noteObj, resolve, reject);
+      addSubdocumentToModel(EmployerNotesModel, employerId, Note, 'notes', noteObj, resolve, reject);
     });
   },
   // delete a specifc employer note document
-  deleteNote: (employerNoteId, noteId) => {
+  deleteNote: (employerId, noteId) => {
     return new Promise((resolve, reject) => {
-      deleteSubdocument(EmployerNotesModel, employerNoteId, 'notes', noteId, resolve, reject);
+      deleteSubdocument(EmployerNotesModel, employerId, 'notes', noteId, resolve, reject);
     });
   },
   // update a specifc employer note document
-  updateNote: (employerNoteId, noteId, updatedFields) => {
+  updateNote: (employerId, noteId, updatedFields) => {
     return new Promise((resolve, reject) => {
-      updateSubdocument(EmployerNotesModel, employerNoteId, 'notes', noteId, updatedFields, resolve, reject);
+      updateSubdocument(EmployerNotesModel, employerId, 'notes', noteId, updatedFields, resolve, reject);
     });
   }
 }
