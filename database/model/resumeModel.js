@@ -95,7 +95,7 @@ const resumeSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 60
+        maxLength: 60,
       },
       startDate: {type: Date},
       endDate: {type: Date},
@@ -105,6 +105,11 @@ const resumeSchema = new mongoose.Schema({
         minLength: 2,
         maxLength: 500
       },
+      summary: {
+        type: String,
+        required: false,
+        maxLength: 100
+      }
     }]
   },
   certificates: {
@@ -133,4 +138,4 @@ const resumeSchema = new mongoose.Schema({
 
 const ResumeModel = mongoose.model('resume', resumeSchema);
 
-module.exports = ResumeModel;
+module.exports = { ResumeModel };
