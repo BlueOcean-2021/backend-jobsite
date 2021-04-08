@@ -23,15 +23,30 @@ const seeker = {
     });
   },
 
-  // getAllData: ({ seekerId })=> {
-  //   return new Promise((resolve, reject) => {
 
+  getId: (email) => {
+    return new Promise((resolve, reject) => {
+      SeekerModel.findOne({email: email}, '_id')
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    })
+  },
 
-
-  //     findAllInSubdocument(SeekerModel, seekerId, 'notes', resolve, reject);
-  //   });
-  // },
-
+  getAllData: (seekerId) => {
+    return new Promise((resolve, reject) => {
+      SeekerModel.findOne({_id: seekerId})
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    })
+  },
 
   filterNotes: (seekerId, params) => {
     return new Promise((resolve, reject) => {

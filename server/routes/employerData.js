@@ -12,7 +12,7 @@ router.post('/newemployer', (req, res, next) => {
   employerNote.createEmployerNoteModel({ email })
     .then(result => {
       res.status(201).send({
-        employerId: result._id,
+        employerNoteId: result._id,
         status: 'OK'
       });
     })
@@ -20,11 +20,23 @@ router.post('/newemployer', (req, res, next) => {
   }
 });
 
+router.get('/id', (req, res, next) => {
+  let {email} = req.body;
+  employerNote.getId(email)
+    .then(result => {
+      res.status(200).send({
+        status: 'OK',
+        employerNoteId: result._id
+      });
+    })
+    .catch(err => res.status(404).send(err));
+});
+
 // UNTESTED
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
-  let { employerId } = req.body;
-  seeker.findAllNotes({ employerId })
+  let { employerNoteId } = req.body;
+  employerNote.findAllNotes({ employerNoteId })
     .then(result => {
       res.status(200).send({
         status: 'OK',
@@ -34,10 +46,11 @@ router.get('/note/all', (req, res, next) => {
     .catch(err => res.status(404).send(err));
 });
 
+
 // ________________update a note
 router.patch('/note', (req, res, next) => {
-  let { employerId, noteId, updatedFields } = req.body;
-  seeker.updateNote(employerId, noteId, updatedFields)
+  let { employerNoteId, noteId, updatedFields } = req.body;
+  employerNote.updateNote(employerNoteId, noteId, updatedFields)
     .then(result => {
       res.status(202).send({
         status: 'OK',
@@ -49,8 +62,8 @@ router.patch('/note', (req, res, next) => {
 
 // ________________delete a note
 router.delete('/note', (req, res, next) => {
-  let {employerId, noteId} = req.body;
-  seeker.deleteNote(employerId, noteId)
+  let {employerNoteId, noteId} = req.body;
+  employerNote.deleteNote(employerNoteId, noteId)
     .then(result => {
       res.sendStatus(204)
     })
