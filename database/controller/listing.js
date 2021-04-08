@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const JobListingModel = require('../model/JobListingModel.js');
+const JobListingModel = require('../model/jobListingModel.js');
 const { createModel } = require('./reuse.js');
 
 

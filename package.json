@@ -6,7 +6,11 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "test": "jest --coverage",
-    "test-u": "npm run test -- -u"
+    "test-u": "npm run test -- -u",
+    "docker-build": "docker build -t jobs-api:1.0 .",
+    "docker-run":"docker run --name jobs-api -d --env-file .env-docker -p 5000:5000 jobs-api:1.0",
+    "docker-login": "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 816674678256.dkr.ecr.us-east-2.amazonaws.com",
+    "docker-push": "docker tag jobs-api:1.0 816674678256.dkr.ecr.us-east-2.amazonaws.com/jobs-api:1.0 & docker push 816674678256.dkr.ecr.us-east-2.amazonaws.com/jobs-api:1.0"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,7 @@
   "homepage": "https://github.com/BlueOcean-2021/backend-jobsite#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

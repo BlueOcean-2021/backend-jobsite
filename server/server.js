@@ -1,5 +1,6 @@
 const express = require('express');
 const { application } = require('../config');
+const cors = require('cors');
 
 // router
 const listingRoutes = require('./routes/listing.js');
@@ -7,6 +8,7 @@ const resumeRoutes = require('./routes/resume.js');
 const seekerDataRoutes = require('./routes/seekerData.js');
 const employerRoutes = require('./routes/employerData.js');
 const app = express();
+app.use(cors());
 
 app.use(express.static('client/dist'));
 
