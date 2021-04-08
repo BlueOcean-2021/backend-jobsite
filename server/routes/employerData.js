@@ -20,4 +20,17 @@ router.post('/newemployer', (req, res, next) => {
   }
 });
 
+router.get('/id', (req, res, next) => {
+  let {email} = req.body;
+  employerNote.getId(email)
+    .then(result => {
+      res.status(200).send({
+        status: 'OK',
+        seekerId: result._id
+      });
+    })
+    .catch(err => res.status(404).send(err));
+});
+
+
 module.exports = router;

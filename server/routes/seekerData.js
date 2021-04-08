@@ -16,6 +16,20 @@ router.post('/newseeker', (req, res, next) => {
     .catch(err => res.send(403));
 });
 
+//___get seekerId from email
+
+router.get('/id', (req, res, next) => {
+  let {email} = req.body;
+  seeker.getId(email)
+    .then(result => {
+      res.status(200).send({
+        status: 'OK',
+        seekerId: result._id
+      });
+    })
+    .catch(err => res.status(404).send(err));
+});
+
 // ____Notes________________________________
 // ______________add new note
 router.post('/note', (req, res, next) => {
