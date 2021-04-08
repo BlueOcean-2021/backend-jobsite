@@ -19,7 +19,7 @@ router.post('/newseeker', (req, res, next) => {
 //___get seekerId from email
 
 router.get('/all', (req, res, next) => {
-  let {seekerId} = req.body;
+  let {seekerId} = req.params;
   seeker.getAllData(seekerId)
     .then(result => {
       res.status(200).send({
