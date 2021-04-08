@@ -66,7 +66,7 @@ const getAllListings = (req, res, next) => {
 };
 
 const getEmployerListings = (req, res, next) => {
-  const {employerId} = req.body;
+  const {employerId} = req.query;
   if (!employerId) {
     res.sendStatus(404);
   } else {
