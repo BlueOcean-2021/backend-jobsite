@@ -60,7 +60,7 @@ const listing = {
   // find all
   // if employ _id passed -> find all listings by specific employer
   findAllByEmployer: (employerId) => {
-    let options = employerId ? {_id: employerId} : {};
+    let options = employerId ? {employerId: employerId} : {};
     return new Promise((resolve, reject) => {
       JobListingModel.find(options)
         .then(result => {
