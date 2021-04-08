@@ -21,8 +21,11 @@ router.post('/newemployer', (req, res, next) => {
 });
 
 router.get('/id', (req, res, next) => {
-  let {email} = req.body;
-  employerNote.getId(email)
+  let {email} = req.query;
+  if (!email) {
+    res.sendStatus(422);
+  } else {
+    employerNote.getId(email)
     .then(result => {
       res.status(200).send({
         status: 'OK',
@@ -30,12 +33,13 @@ router.get('/id', (req, res, next) => {
       });
     })
     .catch(err => res.status(404).send(err));
+  }
 });
 
 // UNTESTED
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
-  let { employerId } = req.body;
+  let { employerId } = req.query;
   employerNote.findAllNotes({ employerId })
     .then(result => {
       res.status(200).send({
