@@ -22,30 +22,21 @@ const seeker = {
       createModel(SeekerModel, { email }, resolve, reject);
     });
   },
-
-
+  // get id of seeker note document
   getId: (email) => {
     return new Promise((resolve, reject) => {
       SeekerModel.findOne({email: email}, '_id')
-        .then(result => {
-          resolve(result);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    })
+        .then(result => resolve(result))
+        .catch(err => reject(err));
+    });
   },
-
+  // get all data of seeker note document
   getAllData: (seekerId) => {
     return new Promise((resolve, reject) => {
       SeekerModel.findOne({_id: seekerId})
-        .then(result => {
-          resolve(result);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    })
+        .then(result => resolve(result))
+        .catch(err => reject(err));
+    });
   },
 
   filterNotes: (seekerId, params) => {

@@ -30,7 +30,6 @@ const postListing = (req, res, next) => {
   }
 }
 
-
 const updateListing = (req, res, next) => {
   if (!req.body.id) {
     res.sendStatus(422);
@@ -93,11 +92,21 @@ const applyToListing = (req, res, next) => {
   }
 }
 
+const searchListings = (req, res, next) => {
+  if (req.query.search === '') {
+    return
+  }
+  listing.searchListings(req.query.search)
+    .then(response => res.json(response))
+    .catch(err => res.sendStatus(404))
+}
+
 module.exports = {
   getListing,
   postListing,
   updateListing,
   getAllListings,
   deleteListing,
-  applyToListing
+  applyToListing,
+  searchListings
 }

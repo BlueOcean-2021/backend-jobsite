@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const escapeStringRegexp = require('escape-string-regexp');
+
+const regexCreate = (string) => {
+  let excapedRegex = escapeStringRegexp(string);
+  return new RegExp(excapedRegex);
+}
 
 const createModel = (model, params, resolve, reject) => {
   var newModel = new model(params);
@@ -87,6 +93,7 @@ const findInDb = (mainModel, params, resolve, reject) => {
 };
 
 module.exports = {
+  regexCreate,
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,

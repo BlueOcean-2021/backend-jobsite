@@ -26,7 +26,8 @@ const {
   updateListing,
   getAllListings,
   deleteListing,
-  applyToListing
+  applyToListing,
+  searchListings
 } = listingRoutes;
 
 const {
@@ -34,7 +35,8 @@ const {
   postResume,
   getAllResumes,
   updateResume,
-  deleteResume
+  deleteResume,
+  searchResumes
 } = resumeRoutes;
 
 // api/seekerData
@@ -52,6 +54,7 @@ app.get('/api/listing/all', getAllListings);
 app.post('/api/listing', postListing);
 app.put('/api/listing', updateListing);
 app.patch('/api/listing/apply', applyToListing);
+app.get('/api/listing/search', searchListings);
 app.delete('/api/listing', deleteListing);
 
 app.get('/api/resume/', getResume);
@@ -60,6 +63,7 @@ app.post('/api/resume', postResume);
 app.put('/api/resume', updateResume);
 app.delete('/api/resume', deleteResume);
 app.get('/api/resume/all', getAllResumes);
+app.get('/api/resume/search', searchListings);
 
 app.listen(application.port, () => {
   console.log('Client server listening on ' + application.port)
