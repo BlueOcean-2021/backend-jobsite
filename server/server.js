@@ -27,7 +27,8 @@ const {
   getAllListings,
   deleteListing,
   applyToListing,
-  searchListings
+  searchListings,
+  getEmployerListings
 } = listingRoutes;
 
 const {
@@ -51,6 +52,7 @@ app.use('/api/employerdata', employerRoutes);
 
 app.get('/api/listing', getListing);
 app.get('/api/listing/all', getAllListings);
+app.get('/api/listing/employer', getEmployerListings);
 app.post('/api/listing', postListing);
 app.put('/api/listing', updateListing);
 app.patch('/api/listing/apply', applyToListing);

@@ -13,7 +13,7 @@ const getListing =  (req, res, next) => {
         res.sendStatus(404);
       })
   }
-}
+};
 
 const postListing = (req, res, next) => {
   //needs employerId
@@ -42,7 +42,7 @@ const updateListing = (req, res, next) => {
         res.sendStatus(404);
       })
   }
-}
+};
 
 const getAllListings = (req, res, next) => {
   if (!req.body.filters) {
@@ -55,6 +55,21 @@ const getAllListings = (req, res, next) => {
     })
   } else {
     listing.findAllByFilter(req.body)
+    .then(result => {
+      res.json(result);
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+  }
+};
+
+const getEmployerListings = (req, res, next) => {
+  const {employerId} = req.query;
+  if (!employerId) {
+    res.sendStatus(404);
+  } else {
+    listing.findAllByEmployer(employerId)
     .then(result => {
       res.json(result);
     })
@@ -76,7 +91,7 @@ const deleteListing = (req, res, next) => {
         res.sendStatus(404);
       })
   }
-}
+};
 
 const applyToListing = (req, res, next) => {
   if (!req.query.seekerId || !req.query.listingId) {
@@ -90,7 +105,7 @@ const applyToListing = (req, res, next) => {
         res.sendStatus(404);
       })
   }
-}
+};
 
 const searchListings = (req, res, next) => {
   if (req.query.search === '') {
@@ -108,5 +123,6 @@ module.exports = {
   getAllListings,
   deleteListing,
   applyToListing,
-  searchListings
+  searchListings,
+  getEmployerListings
 }
