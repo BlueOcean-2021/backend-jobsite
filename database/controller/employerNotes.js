@@ -16,6 +16,17 @@ const employerNote = {
       createModel(EmployerNotesModel, { email }, resolve, reject);
     });
   },
+  getId: (email) => {
+    return new Promise((resolve, reject) => {
+      EmployerNotesModel.findOne({email: email}, '_id')
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    })
+  },
   // filters note category
   filterNotes: (employerNoteId, params) => {
     return new Promise((resolve, reject) => {
