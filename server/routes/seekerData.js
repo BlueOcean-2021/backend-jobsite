@@ -18,6 +18,19 @@ router.post('/newseeker', (req, res, next) => {
 
 //___get seekerId from email
 
+router.get('/all', (req, res, next) => {
+  let {seekerId} = req.body;
+  seeker.getAllData(seekerId)
+    .then(result => {
+      res.status(200).send({
+        status: 'OK',
+        data: result
+      });
+  })
+  .catch(err => res.status(404).send(err));
+})
+
+
 router.get('/id', (req, res, next) => {
   let {email} = req.body;
   seeker.getId(email)

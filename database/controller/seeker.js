@@ -23,10 +23,22 @@ const seeker = {
     });
   },
 
-  //untested
+
   getId: (email) => {
     return new Promise((resolve, reject) => {
       SeekerModel.findOne({email: email}, '_id')
+        .then(result => {
+          resolve(result);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    })
+  },
+
+  getAllData: (seekerId) => {
+    return new Promise((resolve, reject) => {
+      SeekerModel.findOne({_id: seekerId})
         .then(result => {
           resolve(result);
         })
