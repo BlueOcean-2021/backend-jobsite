@@ -21,16 +21,13 @@ router.post('/newseeker', (req, res, next) => {
 
 router.get('/all', (req, res, next) => {
   let {seekerId} = req.query;
-  console.log(seekerId);
   var objToSend;
   seeker.getAllData(seekerId)
     .then(result => {
       objToSend = result;
-      console.log('ok got data ', result)
       return resume.findOne(seekerId);
     })
     .then(response => {
-      console.log('ok got resume ', response[0]);
       res.status(200).send({
         status: 'OK',
         data: objToSend,
@@ -42,7 +39,7 @@ router.get('/all', (req, res, next) => {
 
 
 router.get('/id', (req, res, next) => {
-  let {email} = req.body;
+  let {email} = req.query;
   seeker.getId(email)
     .then(result => {
       res.status(200).send({
