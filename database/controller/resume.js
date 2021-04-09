@@ -27,6 +27,16 @@ const resume = {
     });
   },
 
+  searchResumesPerListing: (criteriaArray) => {
+    return new Promise ((resolve, reject) => {
+      ResumeModel.find({ '_id': { $in: criteriaArray} })
+        .exec(function(err, results) {
+          if (err) { reject(err) };
+          resolve(results);
+        });
+    });
+  },
+
   findOne: (seekerId) => {
     return new Promise((resolve, reject) => {
       ResumeModel.find({seekerId: seekerId})

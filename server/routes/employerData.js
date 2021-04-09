@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { employerNote } = require('../../database/controller');
 
-//       /api/employerdata
-// __Unspecified user________________________________
+//  -> /api/employerdata ->
+
 //_____________________New User
 router.post('/newemployer', (req, res, next) => {
   if (!req.body.email) {

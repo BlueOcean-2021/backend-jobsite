@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const JobListingModel = require('../model/jobListingModel.js');
 const { createModel, regexCreate } = require('./reuse.js');
 
+const listing = {
 
-const listing = { 
-  // create new listing
   createOne:(params) => {
     return new Promise((resolve, reject) => {
       createModel(JobListingModel, params, resolve, reject);
@@ -24,6 +23,16 @@ const listing = {
           {'title': {$regex: search, $options: 'i'}}
         ]
       })
+        .exec(function(err, results) {
+          if (err) { reject(err) };
+          resolve(results);
+        });
+    });
+  },
+
+  searchListingsPerCandidate: (criteriaArray) => {
+    return new Promise ((resolve, reject) => {
+      JobListingModel.find({ '_id': { $in: criteriaArray} })
         .exec(function(err, results) {
           if (err) { reject(err) };
           resolve(results);
