@@ -65,7 +65,7 @@ app.post('/api/resume', postResume);
 app.put('/api/resume', updateResume);
 app.delete('/api/resume', deleteResume);
 app.get('/api/resume/all', getAllResumes);
-app.get('/api/resume/search', searchListings);
+app.get('/api/resume/search', searchResumes);
 
 app.listen(application.port, () => {
   console.log('Client server listening on ' + application.port)
