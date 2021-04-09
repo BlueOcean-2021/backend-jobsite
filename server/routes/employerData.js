@@ -9,14 +9,14 @@ router.post('/newemployer', (req, res, next) => {
     res.sendStatus(400);
   } else {
     let { email } = req.body;
-  employerNote.createEmployerNoteModel({ email })
-    .then(result => {
-      res.status(201).send({
-        employerId: result._id,
-        status: 'OK'
-      });
-    })
-    .catch(err => res.send(403));
+    employerNote.createEmployerNoteModel({ email })
+      .then(result => {
+        res.status(201).send({
+          employerId: result._id,
+          status: 'OK'
+        });
+      })
+      .catch(err => res.send(403));
   }
 });
 
@@ -26,13 +26,13 @@ router.get('/id', (req, res, next) => {
     res.sendStatus(422);
   } else {
     employerNote.getId(email)
-    .then(result => {
-      res.status(200).send({
-        status: 'OK',
-        employerNoteId: result._id
-      });
-    })
-    .catch(err => res.status(404).send(err));
+      .then(result => {
+        res.status(200).send({
+          status: 'OK',
+          employerNoteId: result._id
+        });
+      })
+      .catch(err => res.status(404).send(err));
   }
 });
 
@@ -53,14 +53,14 @@ router.get('/note/all', (req, res, next) => {
 router.post('/note', (req, res, next) => {
   let { employerId, noteObj } = req.body;
   employerNote.addNote(employerId, noteObj)
-  .then(result => {
-    res.status(202).send({
-      status: 'OK',
-      notes: result
-    });
-  })
-  .catch(err => res.status(500).send(err));
-})
+    .then(result => {
+      res.status(202).send({
+        status: 'OK',
+        notes: result
+      });
+    })
+    .catch(err => res.status(500).send(err));
+});
 
 // ________________update a note
 router.patch('/note', (req, res, next) => {
@@ -82,7 +82,5 @@ router.delete('/note', (req, res, next) => {
     .then(result => res.sendStatus(204))
     .catch(err => res.sendStatus(403));
 });
-
-
 
 module.exports = router;

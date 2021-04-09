@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { seeker } = require('../../database/controller');
-const {resume} = require('../../database/controller');
+const { resume } = require('../../database/controller');
 
 //       /api/seekerdata
 // __Unspecified user________________________________
