@@ -4,16 +4,13 @@ const escapeStringRegexp = require('escape-string-regexp');
 const regexCreate = (string) => {
   let escapedRegex = escapeStringRegexp(string);
   return new RegExp(escapedRegex);
-}
+};
 
 const createModel = (model, params, resolve, reject) => {
   var newModel = new model(params);
   newModel.save((err, response) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(response);
-    }
+    if (err) { reject(err) };
+    resolve(response);
   });
 };
 
@@ -23,11 +20,8 @@ const addSubdocumentToModel = (mainModel, mainId, addChildModel, childAttributeK
     let newChild = new addChildModel(childObj);
     currentMain[childAttributeKey].push(newChild);
     currentMain.save((err, writtenChild) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(writtenChild);
-      }
+      if (err) { reject(err) };
+      resolve(writtenChild);
     });
   });
 };
@@ -37,27 +31,21 @@ const deleteSubdocument = (mainModel, mainId, childAttributeKey, childId, resolv
     let currentMain = result;
     currentMain[childAttributeKey].pull({ _id: childId });
     currentMain.save((err, response) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(response);
-      }
+      if (err) { reject(err) };
+      resolve(response);
     });
   });
 };
 
 const updateSubdocument = (mainModel, mainId, childAttributeKey, childId, updatedFields, resolve, reject) => {
-  mainModel.findOne({ _id: mainId}, (err, result) => {
+  mainModel.findOne({ _id: mainId }, (err, result) => {
     let currentMain = result;
     for (let field in updatedFields) {
       currentMain[childAttributeKey].id(childId)[field] = updatedFields[field];
     }
     currentMain.save((err, response) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(response);
-      }
+      if (err) { reject(err) };
+      resolve(response);
     });
   });
 };
@@ -78,7 +66,6 @@ const filterSubdocument = (mainModel, mainId, childAttributeKey, params, resolve
 };
 
 const findAllInSubdocument = (mainModel, mainId, childAttributeKey, resolve, reject) => {
-  console.log(mainModel, mainId);
   mainModel.findOne({ _id: mainId}, (err, result) => {
     let currentMain = result;
     if (err) { reject(err) };
@@ -89,16 +76,9 @@ const findAllInSubdocument = (mainModel, mainId, childAttributeKey, resolve, rej
 const findInDb = (mainModel, params, resolve, reject) => {
   mainModel.find(params)
     .then(result => resolve(result))
-    .catch(err => reject(err))
+    .catch(err => reject(err));
 };
 
 module.exports = {
-  regexCreate,
-  createModel,
-  addSubdocumentToModel,
-  deleteSubdocument,
-  updateSubdocument,
-  filterSubdocument,
-  findAllInSubdocument,
-  findInDb
+  regexCreate, createModel, addSubdocumentToModel, deleteSubdocument, updateSubdocument, filterSubdocument, findAllInSubdocument, findInDb
 };
