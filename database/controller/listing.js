@@ -3,7 +3,7 @@ const JobListingModel = require('../model/jobListingModel.js');
 const { createModel, regexCreate } = require('./reuse.js');
 
 
-const listing = {
+const listing = { 
   // create new listing
   createOne:(params) => {
     return new Promise((resolve, reject) => {

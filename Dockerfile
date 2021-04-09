@@ -1,5 +1,5 @@
-#FROM node:lts-buster
-FROM arm64v8/node:lts-buster
+#FROM arm64v8/node:lts-buster
+FROM node:lts-buster
 
 WORKDIR /app
 COPY . .
