@@ -55,9 +55,6 @@ const deleteResume = (req, res, next) => {
 }
 
 const searchResumes = (req, res, next) => {
-  if (req.query.search === '') {
-    return
-  }
   resume.searchResumes(req.query.search)
     .then(response => res.json(response))
     .catch(err => res.sendStatus(404))
