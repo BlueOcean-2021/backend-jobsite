@@ -4,8 +4,5 @@ var resume = require('./resume.js');
 var seeker = require('./seeker.js');
 
 module.exports = {
-  employerNote,
-  resume,
-  seeker,
-  listing
-}
+  employerNote, resume, seeker, listing,
+};

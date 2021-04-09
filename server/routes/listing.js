@@ -25,6 +25,13 @@ router.get('/search', (req, res, next) => {
     .catch(err => res.sendStatus(404))
 });
 
+//Untested
+router.get('/savedlistings', (req, res, next) => {
+  listing.searchListingsPerCandidate(req.body)
+    .then(result => res.json(result))
+    .catch(err => res.status(500).send(err));
+});
+
 // NOT SURE IF USED
 router.get('/', (req, res, next) => {
   if (!req.query.id) {
