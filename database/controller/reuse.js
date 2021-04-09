@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const escapeStringRegexp = require('escape-string-regexp');
+
+const regexCreate = (string) => {
+  let escapedRegex = escapeStringRegexp(string);
+  return new RegExp(escapedRegex);
+}
 
 const createModel = (model, params, resolve, reject) => {
   var newModel = new model(params);
@@ -72,10 +78,11 @@ const filterSubdocument = (mainModel, mainId, childAttributeKey, params, resolve
 };
 
 const findAllInSubdocument = (mainModel, mainId, childAttributeKey, resolve, reject) => {
+  console.log(mainModel, mainId);
   mainModel.findOne({ _id: mainId}, (err, result) => {
     let currentMain = result;
-      if (err) { reject(err); };
-      resolve(currentMain[childAttributeKey]);
+    if (err) { reject(err) };
+    resolve(currentMain[childAttributeKey]);
   });
 };
 
@@ -86,6 +93,7 @@ const findInDb = (mainModel, params, resolve, reject) => {
 };
 
 module.exports = {
+  regexCreate,
   createModel,
   addSubdocumentToModel,
   deleteSubdocument,

@@ -16,6 +16,7 @@ const employerNote = {
       createModel(EmployerNotesModel, { email }, resolve, reject);
     });
   },
+
   getId: (email) => {
     return new Promise((resolve, reject) => {
       EmployerNotesModel.findOne({email: email}, '_id')
