@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { seeker } = require('../../database/controller');
+const {resume} = require('../../database/controller');
 
 //       /api/seekerdata
 // __Unspecified user________________________________
@@ -19,15 +20,24 @@ router.post('/newseeker', (req, res, next) => {
 //___get seekerId from email
 
 router.get('/all', (req, res, next) => {
-  let {seekerId} = req.params;
+  let {seekerId} = req.query;
+  console.log(seekerId);
+  var objToSend;
   seeker.getAllData(seekerId)
     .then(result => {
+      objToSend = result;
+      console.log('ok got data ', result)
+      return resume.findOne(seekerId);
+    })
+    .then(response => {
+      console.log('ok got resume ', response[0]);
       res.status(200).send({
         status: 'OK',
-        data: result
+        data: objToSend,
+        resume: response[0]
       });
-  })
-  .catch(err => res.status(404).send(err));
+    })
+    .catch(err => res.status(404).send(err));
 })
 
 
