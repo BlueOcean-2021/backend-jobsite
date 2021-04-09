@@ -17,19 +17,21 @@ const getListing =  (req, res, next) => {
 
 const postListing = (req, res, next) => {
   //needs employerId
+  console.log(req.body);
   if (!req.body.employerId) {
     res.sendStatus(422);
   } else {
     listing.createOne(req.body)
       .then(response => {
-        res.status(204).json(response);
+        res.status(204).send({
+          status: 'OK'
+        });
       })
       .catch(err => {
         res.status(404).send(err);
       })
   }
 }
-
 
 const updateListing = (req, res, next) => {
   if (!req.body.id) {
@@ -86,10 +88,10 @@ const deleteListing = (req, res, next) => {
   } else {
     listing.deleteOne(req.query.id)
       .then(result => {
-        res.json(result);
+        res.status(204).send({status: 'OK'});
       })
       .catch(err => {
-        res.sendStatus(404);
+        res.status(404).send(err);
       })
   }
 };
@@ -108,6 +110,15 @@ const applyToListing = (req, res, next) => {
   }
 };
 
+const searchListings = (req, res, next) => {
+  if (req.query.search === '') {
+    return
+  }
+  listing.searchListings(req.query.search)
+    .then(response => res.json(response))
+    .catch(err => res.sendStatus(404))
+}
+
 module.exports = {
   getListing,
   postListing,
@@ -115,5 +126,6 @@ module.exports = {
   getAllListings,
   deleteListing,
   applyToListing,
+  searchListings,
   getEmployerListings
 }
