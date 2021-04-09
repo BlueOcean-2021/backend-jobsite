@@ -109,6 +109,7 @@ router.delete('/note', (req, res, next) => {
 // ________________find all appointments
 router.get('/appointment/all', (req, res, next) => {
   let { seekerId } = req.body;
+  console.log(seekerId)
   seeker.findAllAppointments({ seekerId })
     .then(result => {
       res.status(200).send({

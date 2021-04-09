@@ -25,7 +25,6 @@ const updateResume = (req, res, next) => {
   if (!req.body.seekerId) {
     res.sendStatus(422);
   } else {
-    //if
     resume.updateOne(req.body)
       .then(result => res.json(result))
       .catch(err => res.sendStatus(404))
@@ -35,12 +34,12 @@ const updateResume = (req, res, next) => {
 const getAllResumes = (req, res, next) => {
   if (!req.body.filters) {
     resume.findAll()
-    .then(result => res.json(result))
-    .catch(err => res.status(500).send(err));
+      .then(result => res.json(result))
+      .catch(err => res.status(500).send(err));
   } else {
     resume.findAllByFilter(req.body)
-    .then(result => res.json(result))
-    .catch(err => res.status(500).send(err));
+      .then(result => res.json(result))
+      .catch(err => res.status(500).send(err));
   }
 }
 
@@ -62,10 +61,5 @@ const searchResumes = (req, res, next) => {
 
 // module.exports = resumeRoutes;
 module.exports = {
-  getResume,
-  postResume,
-  getAllResumes,
-  updateResume,
-  deleteResume,
-  searchResumes
+  getResume, postResume, getAllResumes, updateResume, deleteResume, searchResumes,
 };

@@ -21,7 +21,7 @@ router.post('/newemployer', (req, res, next) => {
 });
 
 router.get('/id', (req, res, next) => {
-  let {email} = req.query;
+  let { email } = req.query;
   if (!email) {
     res.sendStatus(422);
   } else {
@@ -51,7 +51,7 @@ router.get('/note/all', (req, res, next) => {
 });
 
 router.post('/note', (req, res, next) => {
-  let {employerId, noteObj} = req.body;
+  let { employerId, noteObj } = req.body;
   employerNote.addNote(employerId, noteObj)
   .then(result => {
     res.status(202).send({
@@ -61,7 +61,6 @@ router.post('/note', (req, res, next) => {
   })
   .catch(err => res.status(500).send(err));
 })
-
 
 // ________________update a note
 router.patch('/note', (req, res, next) => {
@@ -78,11 +77,9 @@ router.patch('/note', (req, res, next) => {
 
 // ________________delete a note
 router.delete('/note', (req, res, next) => {
-  let {employerId, noteId} = req.body;
+  let { employerId, noteId } = req.body;
   employerNote.deleteNote(employerId, noteId)
-    .then(result => {
-      res.sendStatus(204)
-    })
+    .then(result => res.sendStatus(204))
     .catch(err => res.sendStatus(403));
 });
 
