@@ -43,10 +43,11 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           ECR_REPOSITORY: jobs-api
-          IMAGE_TAG: 1.0
+          IMAGE_TAG: '1.0'
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
       - name: Deployment
         run: |
           aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 816674678256.dkr.ecr.us-east-2.amazonaws.com
