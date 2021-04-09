@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const escapeStringRegexp = require('escape-string-regexp');
 
 const regexCreate = (string) => {
-  let excapedRegex = escapeStringRegexp(string);
-  return new RegExp(excapedRegex);
+  let escapedRegex = escapeStringRegexp(string);
+  return new RegExp(escapedRegex);
 }
 
 const createModel = (model, params, resolve, reject) => {
