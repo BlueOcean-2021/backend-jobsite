@@ -20,7 +20,7 @@ router.post('/newseeker', (req, res, next) => {
 //___get seekerId from email
 
 router.get('/all', (req, res, next) => {
-  let {seekerId} = req.query;
+  let { seekerId } = req.query;
   var objToSend;
   seeker.getAllData(seekerId)
     .then(result => {
@@ -39,7 +39,7 @@ router.get('/all', (req, res, next) => {
 
 
 router.get('/id', (req, res, next) => {
-  let {email} = req.query;
+  let { email } = req.query;
   seeker.getId(email)
     .then(result => {
       res.status(200).send({
@@ -67,7 +67,7 @@ router.post('/note', (req, res, next) => {
 // UNTESTED
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
-  let {seekerId} = req.body;
+  let { seekerId } = req.body;
   seeker.findAllNotes({ seekerId })
     .then(result => {
       res.status(200).send({
@@ -93,7 +93,7 @@ router.patch('/note', (req, res, next) => {
 
 // ________________delete a note
 router.delete('/note', (req, res, next) => {
-  let {seekerId, noteId} = req.body;
+  let { seekerId, noteId } = req.body;
   seeker.deleteNote(seekerId, noteId)
     .then(result => {
       res.sendStatus(204)
@@ -106,7 +106,6 @@ router.delete('/note', (req, res, next) => {
 // ________________find all appointments
 router.get('/appointment/all', (req, res, next) => {
   let { seekerId } = req.body;
-  console.log(seekerId)
   seeker.findAllAppointments({ seekerId })
     .then(result => {
       res.status(200).send({
@@ -170,7 +169,7 @@ router.post('/application', (req, res, next) => {
 
 // ________________get all applications
 router.get('/application/all', (req, res, next) => {
-  let {seekerId} = req.body;
+  let { seekerId } = req.body;
   seeker.findAllApplications(seekerId)
     .then(result => {
       res.status(200).send({
@@ -197,7 +196,7 @@ router.patch('/application', (req, res, next) => {
 
 // ________________delete application
 router.delete('/application', (req, res, next) => {
-  let {seekerId, applicationId} = req.body;
+  let { seekerId, applicationId } = req.body;
   seeker.deleteApplication(seekerId, applicationId)
     .then(result => res.sendStatus(204))
     .catch(err => res.sendStatus(403));
