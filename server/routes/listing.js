@@ -26,8 +26,8 @@ router.get('/search', (req, res, next) => {
 });
 
 //Untested
-router.get('/savedlistings', (req, res, next) => {
-  listing.searchListingsPerCandidate(req.body)
+router.post('/savedlistings', (req, res, next) => {
+  listing.searchListingsPerCandidate(req.body.data)
     .then(result => res.json(result))
     .catch(err => res.status(500).send(err));
 });

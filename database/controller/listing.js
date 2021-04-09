@@ -32,7 +32,11 @@ const listing = {
 
   searchListingsPerCandidate: (criteriaArray) => {
     return new Promise ((resolve, reject) => {
-      JobListingModel.find({ '_id': { $in: criteriaArray} })
+      var objectIds = [];
+      for (let id of criteriaArray) {
+        objectIds.push(mongoose.Types.ObjectId(id));
+      }
+      JobListingModel.find({ '_id': { $in: objectIds} })
         .exec(function(err, results) {
           if (err) { reject(err) };
           resolve(results);
