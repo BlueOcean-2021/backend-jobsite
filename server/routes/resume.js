@@ -18,7 +18,6 @@ router.get('/all', (req, res, next) => {
 
 // get all resumes that have applied for a listing
 router.get('/applied', (req, res, next) => {
-  // input needs to be an array
   resume.searchResumesPerListing(req.body)
     .then(result => res.json(result))
     .catch(err => res.status(500).send(err));

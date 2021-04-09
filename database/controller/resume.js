@@ -53,9 +53,9 @@ const resume = {
     });
   },
 
-  updateOne: (resumeId) => {
+  updateOne: (resumeUpdates) => {
     return new Promise((resolve, reject) => {
-      ResumeModel.updateOne({_id: resumeId})
+      ResumeModel.updateOne(resumeUpdates)
         .then(result => resolve(result))
         .catch(err => reject(err));
       });
