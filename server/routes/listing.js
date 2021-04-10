@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const listing = require('../../database/controller/listing.js');
-
+const seeker = require('../../database/controller/seeker.js');
 // router -> /api/listing ->
 
 // TESTED & USED
@@ -17,7 +17,6 @@ router.get('/all', (req, res, next) => {
   };
 });
 
-// TESTED & USED
 // get searched listings
 router.get('/search', (req, res, next) => {
   listing.searchListings(req.query.search)
@@ -25,14 +24,13 @@ router.get('/search', (req, res, next) => {
     .catch(err => res.sendStatus(404))
 });
 
-//Untested
+//get job data from array of ids
 router.post('/savedlistings', (req, res, next) => {
   listing.searchListingsPerCandidate(req.body.data)
     .then(result => res.json(result))
     .catch(err => res.status(500).send(err));
 });
 
-// NOT SURE IF USED
 router.get('/', (req, res, next) => {
   if (!req.query.id) {
     res.sendStatus(422);
@@ -43,7 +41,6 @@ router.get('/', (req, res, next) => {
   }
 });
 
-// TESTED & USED
 // get employer listings
 router.get('/employer', (req, res, next) => {
   const { employerId } = req.query;
@@ -56,7 +53,6 @@ router.get('/employer', (req, res, next) => {
   };
 });
 
-// UNTESTED
 // post listing
 router.post('/', (req, res, next) => {
   if (!req.body.employerId) {
@@ -72,7 +68,6 @@ router.post('/', (req, res, next) => {
   };
 });
 
-// UNTESTED
 // update a job listing
 router.put('/', (req, res, next) => {
   if (!req.body.id) {
@@ -84,7 +79,6 @@ router.put('/', (req, res, next) => {
   };
 });
 
-// UNTESTED
 // app.delete('/api/listing', deleteListing);
 router.delete('/', (req, res, next) => {
   if (!req.query.id) {
@@ -97,15 +91,35 @@ router.delete('/', (req, res, next) => {
 });
 
 // UNTESTED
-// // app.patch('/api/listing/apply', applyToListing);
+// router.patch('/apply', (req, res, next) => {
+//   if (!req.query.seekerId || !req.query.listingId) {
+//     res.sendStatus(422);
+//   } else {
+//     listing.addApplicant(req.query.listingId, req.query.seekerId)
+//       .then(result => res.json(result))
+//       .catch(err => res.sendStatus(404))
+//   };
+// });
+
+//add seeker to a listing and a job listing to a seeker
 router.patch('/apply', (req, res, next) => {
-  if (!req.query.seekerId || !req.query.listingId) {
+  const {seekerId, applicationObj} = req.body;
+  if (!seekerId || !applicationObj) {
     res.sendStatus(422);
   } else {
-    listing.addApplicant(req.query.listingId, req.query.seekerId)
-      .then(result => res.json(result))
-      .catch(err => res.sendStatus(404))
+    listing.addApplicant(applicationObj.jobListingId, seekerId)
+      .then((result) => {
+       return seeker.addApplication(seekerId, applicationObj)
+      })
+      .then((response) => {
+        res.status(201).send({
+          applicationId: response.id,
+          status: 'OK'
+      });
+    })
+    .catch(err => res.sendStatus(404))
   };
 });
+
 
 module.exports = router;
