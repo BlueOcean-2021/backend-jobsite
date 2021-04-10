@@ -23,7 +23,6 @@ router.get('/applied', (req, res, next) => {
     .catch(err => res.status(500).send(err));
 });
 
-// TESTED
 router.get('/search', (req, res, next) => {
   resume.searchResumes(req.query.search)
     .then(response => res.json(response))
@@ -51,7 +50,7 @@ router.post('/', (req, res, next) => {
   };
 });
 
-// Update a resume, untested
+// Update a resume
 router.put('/', (req, res, next) => {
   if (!req.body.seekerId) {
     res.sendStatus(422);
@@ -62,7 +61,6 @@ router.put('/', (req, res, next) => {
   };
 });
 
-//Untested
 router.delete('/', (req, res, next) => {
   if (!req.query.id) {
     res.sendStatus(422);
