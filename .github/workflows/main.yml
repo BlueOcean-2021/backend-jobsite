@@ -2,7 +2,7 @@ name: Job Service CI
 
 on:
   push:
-    branches: [main, secret/ipaddress]
+    branches: [main, feat/cdci]
 
 jobs:
   build:
@@ -55,7 +55,7 @@ jobs:
           docker -H $TARGET_HOST:$TARGET_PORT pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker -H $TARGET_HOST:$TARGET_PORT run --name jobs-api -d -p 5000:5000 -e "SECRET=$APP_SECRET" -e "DB_URL=$DB_URL" $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         env:
-          TARGET_HOST: ${{ secrets.BO_IP_ADDRESS }}
+          TARGET_HOST: 18.220.13.101
           TARGET_PORT: 2375
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           ECR_REPOSITORY: jobs-api
