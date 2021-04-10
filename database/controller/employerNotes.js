@@ -1,25 +1,20 @@
 const mongoose = require('mongoose');
 const {
-  createModel, addSubdocumentToModel, deleteSubdocument, filterSubdocument, updateSubdocument, findAllInSubdocument
+  createModel,
+  addSubdocumentToModel,
+  deleteSubdocument,
+  filterSubdocument,
+  updateSubdocument,
+  findAllInSubdocument,
 } = require('./reuse.js');
 const { EmployerNotesModel, Note } = require('../model/employerNotes.js');
 
 const employerNote = {
   // instatiate new employer note document
-  createEmployerNoteModel: ({ email }) => {
-    return new Promise((resolve, reject) => {
-      createModel(EmployerNotesModel, { email }, resolve, reject);
-    });
-  },
+  createEmployerNoteModel: ({ email }) => createModel(EmployerNotesModel, { email }),
 
-  getId: (email) => {
-    return new Promise((resolve, reject) => {
-      EmployerNotesModel.findOne({email: email}, '_id')
-        .then(result => resolve(result))
-        .catch(err => reject(err));
-    });
-  },
-  // filters note category
+  getId: (email) => EmployerNotesModel.findOne({email: email}, '_id'),
+
   filterNotes: (employerNoteId, params) => {
     return new Promise((resolve, reject) => {
       filterSubdocument(EmployerNotesModel, employerNoteId, 'notes', params, resolve, reject)

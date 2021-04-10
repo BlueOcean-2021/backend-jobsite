@@ -14,7 +14,7 @@ router.post('/newseeker', (req, res, next) => {
         status: 'OK'
       });
     })
-    .catch(err => res.send(403));
+    .catch(err => res.sendStatus(403));
 });
 
 //___get seekerId from email
@@ -61,7 +61,7 @@ router.post('/note', (req, res, next) => {
         notes: result.notes
       });
     })
-    .catch(err => res.send(403));
+    .catch(err => res.sendStatus(403));
 });
 
 // UNTESTED
