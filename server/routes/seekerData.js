@@ -3,8 +3,8 @@ const { seeker } = require('../../database/controller');
 const { resume } = require('../../database/controller');
 
 //       /api/seekerdata
-// __Unspecified user________________________________
-//_____________________New User
+
+// __________Unspecified New User
 router.post('/newseeker', (req, res, next) => {
   let { email } = req.body;
   seeker.createSeekerModel({ email })
@@ -51,6 +51,7 @@ router.get('/id', (req, res, next) => {
 });
 
 // ____Notes________________________________
+
 // ______________add new note
 router.post('/note', (req, res, next) => {
   let { seekerId, noteObj } = req.body;
@@ -64,7 +65,7 @@ router.post('/note', (req, res, next) => {
     .catch(err => res.send(403));
 });
 
-// UNTESTED
+
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
   let { seekerId } = req.body;
@@ -154,6 +155,7 @@ router.delete('/appointment', (req, res, next) => {
 });
 
 // __ Applications____________________________________
+
 // ________________add new application
 router.post('/application', (req, res, next) => {
   let { seekerId, applicationObj } = req.body;
@@ -180,7 +182,7 @@ router.get('/application/all', (req, res, next) => {
     .catch(err => res.status(404).send(err));
 });
 
-// UNTESTED
+
 // ________________update application
 router.patch('/application', (req, res, next) => {
   let { seekerId, applicationId, updatedFields } = req.body;
@@ -230,7 +232,7 @@ router.get('/savedjob/all', (req, res, next) => {
     .catch(err => res.status(404).send(err));
 });
 
-// UNTESTED
+
 // _____________update saved job
 router.patch('/savedjob', (req, res, next) => {
   let { seekerId, savedJobId, updatedFields } = req.body;
@@ -244,7 +246,7 @@ router.patch('/savedjob', (req, res, next) => {
   .catch(err => res.status(400).send(err));
 });
 
-// UNTESTED
+
 // _____________delete saved job
 router.delete('/savedjob', (req, res, next) => {
   let { seekerId, savedJobId } = req.body;

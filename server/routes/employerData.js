@@ -36,7 +36,6 @@ router.get('/id', (req, res, next) => {
   }
 });
 
-// UNTESTED
 // ________________find all notes
 router.get('/note/all', (req, res, next) => {
   let { employerId } = req.query;
