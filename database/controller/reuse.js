@@ -6,12 +6,9 @@ const regexCreate = (string) => {
   return new RegExp(escapedRegex);
 };
 
-const createModel = (model, params, resolve, reject) => {
+const createModel = (model, params) => {
   var newModel = new model(params);
-  newModel.save((err, response) => {
-    if (err) { reject(err) };
-    resolve(response);
-  });
+  return newModel.save();
 };
 
 const addSubdocumentToModel = (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject) => {
@@ -50,7 +47,6 @@ const updateSubdocument = (mainModel, mainId, childAttributeKey, childId, update
   });
 };
 
-// single fitler only
 const filterSubdocument = (mainModel, mainId, childAttributeKey, params, resolve, reject) => {
   let target = Object.keys(params)[0];
   let targetValue = Object.values(params)[0];
@@ -73,12 +69,15 @@ const findAllInSubdocument = (mainModel, mainId, childAttributeKey, resolve, rej
   });
 };
 
-const findInDb = (mainModel, params, resolve, reject) => {
-  mainModel.find(params)
-    .then(result => resolve(result))
-    .catch(err => reject(err));
-};
+const findInDb = (mainModel, params) => mainModel.find(params);
 
 module.exports = {
-  regexCreate, createModel, addSubdocumentToModel, deleteSubdocument, updateSubdocument, filterSubdocument, findAllInSubdocument, findInDb
+  regexCreate,
+  createModel,
+  addSubdocumentToModel,
+  deleteSubdocument,
+  updateSubdocument,
+  filterSubdocument,
+  findAllInSubdocument,
+  findInDb,
 };

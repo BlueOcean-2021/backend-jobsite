@@ -1,6 +1,7 @@
 const express = require('express');
 const { application } = require('../config');
 const cors = require('cors');
+const dbConnect = require('../database/database.js');
 // router
 const listingRoutes = require('./routes/listing.js');
 const resumeRoutes = require('./routes/resume.js');

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const dbConnect = require('../database.js');
 
 const noteSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now },

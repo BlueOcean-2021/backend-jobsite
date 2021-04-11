@@ -3,7 +3,7 @@ const listing = require('../../database/controller/listing.js');
 const seeker = require('../../database/controller/seeker.js');
 // router -> /api/listing ->
 
-// TESTED & USED
+
 // get all listings
 router.get('/all', (req, res, next) => {
   if (!req.body.filters) {
@@ -90,16 +90,6 @@ router.delete('/', (req, res, next) => {
   };
 });
 
-// UNTESTED
-// router.patch('/apply', (req, res, next) => {
-//   if (!req.query.seekerId || !req.query.listingId) {
-//     res.sendStatus(422);
-//   } else {
-//     listing.addApplicant(req.query.listingId, req.query.seekerId)
-//       .then(result => res.json(result))
-//       .catch(err => res.sendStatus(404))
-//   };
-// });
 
 //add seeker to a listing and a job listing to a seeker
 router.patch('/apply', (req, res, next) => {

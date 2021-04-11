@@ -16,28 +16,12 @@ const {
 } = require('../model/seekerDataModel.js');
 
 const seeker = {
-  // instatiate new seeker note document
-  createSeekerModel: ({ email }) => {
-    return new Promise((resolve, reject) => {
-      createModel(SeekerModel, { email }, resolve, reject);
-    });
-  },
-  // get id of seeker note document
-  getId: (email) => {
-    return new Promise((resolve, reject) => {
-      SeekerModel.findOne({email: email}, '_id')
-        .then(result => resolve(result))
-        .catch(err => reject(err));
-    });
-  },
-  // get all data of seeker note document
-  getAllData: (seekerId) => {
-    return new Promise((resolve, reject) => {
-      SeekerModel.findOne({_id: seekerId})
-        .then(result => resolve(result))
-        .catch(err => reject(err));
-    });
-  },
+
+  createSeekerModel: ({ email }) => createModel(SeekerModel, { email }),
+
+  getId: (email) => SeekerModel.findOne({email: email}, '_id'),
+
+  getAllData: (seekerId) => SeekerModel.findOne({_id: seekerId}),
 
   filterNotes: (seekerId, params) => {
     return new Promise((resolve, reject) => {
@@ -87,7 +71,6 @@ const seeker = {
     });
   },
 
-  // add subdocument params: (mainModel, mainId, addChildModel, childAttributeKey, childObj, resolve, reject)
   addNote: (seekerId, noteObj) => {
     return new Promise((resolve, reject) => {
       addSubdocumentToModel(SeekerModel, seekerId, SeekerNoteModel, 'notes', noteObj, resolve, reject);
@@ -111,7 +94,7 @@ const seeker = {
       addSubdocumentToModel(SeekerModel, seekerId, SavedJobsModel, 'savedJobs', savedJobsObj, resolve, reject);
     });
   },
-  // delete subdocument params: (mainModel, mainId, childAttributeKey, childId, resolve, reject)
+
   deleteNote: (seekerId, noteId) => {
     return new Promise((resolve, reject) => {
       deleteSubdocument(SeekerModel, seekerId, 'notes', noteId, resolve, reject);
@@ -135,7 +118,7 @@ const seeker = {
       deleteSubdocument(SeekerModel, seekerId, 'savedJobs', savedJobId, resolve, reject);
     });
   },
-  // update subdocument params: (mainModel, mainId, childAttributeKey, childId, updatedFields, resolve, reject)
+
   updateNote: (seekerId, noteId, updatedFields) => {
     return new Promise((resolve, reject) => {
       updateSubdocument(SeekerModel, seekerId, 'notes', noteId, updatedFields, resolve, reject);
